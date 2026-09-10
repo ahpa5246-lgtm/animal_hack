@@ -3,212 +3,217 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10251f" />
   <title>Invisible Fence — Urban Animal Intelligence</title>
-  <meta name="description" content="Invisible Fence maps hidden urban risks for stray animals and recommends interventions before harm happens." />
+  <meta name="description" content="Invisible Fence maps hidden urban risks for stray animals and turns scattered sightings into actionable rescue intelligence." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="noise"></div>
-  <header class="nav shell">
-    <a class="brand" href="#top" aria-label="Invisible Fence home">
-      <span class="brand-mark">IF</span>
-      <span class="brand-copy"><b>Invisible Fence</b><small>Urban Animal Intelligence</small></span>
+  <div class="site-noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="wordmark" href="#top" aria-label="Invisible Fence home">
+      <span class="wordmark-symbol">IF</span>
+      <span>Invisible Fence</span>
     </a>
-    <nav>
-      <a href="#story">Why it matters</a>
-      <a href="#map">Risk map</a>
-      <button class="ghost-button" id="reportBtn">Report animal</button>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="#why">Why it matters</a>
+      <a href="#system">System</a>
+      <a href="#live-map">Live map</a>
     </nav>
+    <button class="report-link" data-open-report>Report an animal <span>↗</span></button>
   </header>
 
-  <main id="top">
-    <section class="hero shell">
-      <div class="hero-grid"></div>
-      <div class="hero-orbit orbit-one"></div>
-      <div class="hero-orbit orbit-two"></div>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-map" id="heroMap" aria-hidden="true"></div>
+      <div class="hero-vignette"></div>
+      <div class="hero-grid-lines"></div>
+
       <div class="hero-copy">
-        <span class="eyebrow">Urban animal intelligence / Baghdad pilot</span>
-        <h1>The city has <em>invisible danger zones.</em></h1>
-        <p>We combine citizen sightings, heat, traffic, water access and movement patterns to show where stray animals are most at risk — before the next emergency happens.</p>
+        <p class="kicker"><span></span> Baghdad pilot / AnimalHack 2026</p>
+        <h1 id="hero-title">See the city<br><em>before it hurts them.</em></h1>
+        <p class="hero-deck">A spatial intelligence layer for stray-animal safety — combining heat, traffic, water access and movement signals into one living map.</p>
         <div class="hero-actions">
-          <a class="primary-button" href="#map">Explore the live map <span>↘</span></a>
-          <button class="text-button" data-scroll="#story">See how it works</button>
+          <a class="button button-light" href="#live-map">Enter live map <span>↓</span></a>
+          <button class="button button-quiet" data-scroll="#why">How it works</button>
         </div>
       </div>
 
-      <div class="city-visual" aria-hidden="true">
-        <div class="sun-glow"></div>
-        <div class="skyline skyline-back"></div>
-        <div class="skyline skyline-front"></div>
-        <div class="road road-a"></div>
-        <div class="road road-b"></div>
-        <div class="heat heat-a"></div>
-        <div class="heat heat-b"></div>
-        <div class="heat heat-c"></div>
-        <div class="route route-one"></div>
-        <div class="route route-two"></div>
-        <div class="animal-dot dog-dot"><span>DOG / 3</span></div>
-        <div class="animal-dot cat-dot"><span>CATS / 6</span></div>
-        <div class="water-dot"><span>WATER</span></div>
-        <div class="hero-meter">
-          <span>LIVE RISK INDEX</span>
-          <strong>82</strong>
-          <small>High heat + crossing exposure</small>
+      <aside class="hero-readout" aria-label="Live zone readout">
+        <div class="readout-label">LIVE ZONE</div>
+        <div class="readout-row"><span>Al-Mansour 18</span><b>High risk</b></div>
+        <div class="readout-score"><strong>84</strong><span>/100</span></div>
+        <div class="readout-meter"><i style="width:84%"></i></div>
+        <div class="readout-meta">
+          <span>46°C surface</span>
+          <span>1.4 km to water</span>
+          <span>17 sightings</span>
         </div>
-      </div>
+      </aside>
 
-      <div class="hero-caption">
-        <span>01</span>
-        <p>What looks like an ordinary street to us can be a survival corridor to them.</p>
+      <div class="hero-footnote">01 / URBAN ANIMAL INTELLIGENCE</div>
+      <div class="scroll-cue">SCROLL TO EXPLORE <span>↓</span></div>
+    </section>
+
+    <section class="manifesto" id="why">
+      <div class="section-index">01</div>
+      <div class="manifesto-inner">
+        <p class="eyebrow">THE BLIND SPOT</p>
+        <h2>A road can look ordinary to us — and be a survival corridor to them.</h2>
+        <p class="manifesto-lede">Stray animals do not experience a city as streets and districts. They experience shade, heat, water, traffic, food, territory and escape routes. Invisible Fence translates those conditions into a map humans can act on.</p>
+      </div>
+      <div class="manifesto-rule"></div>
+      <div class="metric-strip">
+        <div><b>Heat</b><span>surface exposure</span></div>
+        <div><b>Traffic</b><span>crossing pressure</span></div>
+        <div><b>Water</b><span>access gap</span></div>
+        <div><b>Movement</b><span>repeat corridors</span></div>
       </div>
     </section>
 
-    <section class="story shell" id="story">
-      <article class="story-row">
-        <div class="story-number">01</div>
-        <div class="story-copy">
-          <span class="eyebrow">What we don't see</span>
-          <h2>A street can be safe for us and deadly for them.</h2>
-          <p>Heat stress, fast traffic, missing water and repeated crossings often overlap. Invisible Fence turns those signals into one readable risk layer.</p>
+    <section class="editorial-story" id="system">
+      <article class="story-block story-a">
+        <div class="story-visual map-poster">
+          <div class="poster-grid"></div>
+          <div class="poster-road r1"></div>
+          <div class="poster-road r2"></div>
+          <div class="poster-road r3"></div>
+          <div class="poster-zone pz1"></div>
+          <div class="poster-zone pz2"></div>
+          <div class="poster-point pp1"></div>
+          <div class="poster-point pp2"></div>
+          <div class="poster-copy">BAGHDAD<br>14:00</div>
+          <div class="poster-tag">RISK FIELD / 84</div>
         </div>
-        <div class="story-panel risk-panel">
-          <span class="panel-label">AL-MANSOUR / ZONE 18</span>
-          <strong>Critical after 14:00</strong>
-          <div class="metric"><span>Surface heat</span><b>46°C</b></div>
-          <div class="metric"><span>Water distance</span><b>1.4 km</b></div>
-          <div class="metric"><span>Crossing frequency</span><b>High</b></div>
+        <div class="story-copy">
+          <div class="story-number">02</div>
+          <p class="eyebrow">NOT ANOTHER PIN MAP</p>
+          <h3>The city becomes a field of changing risk.</h3>
+          <p>Every report is more useful when it is connected to context. We turn isolated sightings into zones, corridors and intervention priorities.</p>
+          <dl>
+            <div><dt>INPUT</dt><dd>Citizen sightings + environment</dd></div>
+            <div><dt>MODEL</dt><dd>Explainable spatial risk scoring</dd></div>
+            <div><dt>OUTPUT</dt><dd>Where to intervene first</dd></div>
+          </dl>
         </div>
       </article>
 
-      <article class="story-row reverse">
-        <div class="story-number">02</div>
+      <article class="story-block story-b">
         <div class="story-copy">
-          <span class="eyebrow">The city becomes data</span>
-          <h2>Not another pin map. A living model of risk.</h2>
-          <p>The map changes with time of day, environmental conditions and new sightings, revealing corridors where animals repeatedly move through danger.</p>
-        </div>
-        <div class="story-panel data-panel">
-          <div class="mini-grid"></div>
-          <div class="mini-path"></div>
-          <div class="mini-zone z1"></div>
-          <div class="mini-zone z2"></div>
-          <div class="mini-zone z3"></div>
-          <span class="micro-label label-a">HEAT</span>
-          <span class="micro-label label-b">MOVEMENT</span>
-          <span class="micro-label label-c">WATER GAP</span>
-        </div>
-      </article>
-    </section>
-
-    <section class="map-section" id="map">
-      <div class="map-copy shell">
-        <span class="eyebrow">03 / The invisible fence</span>
-        <h2>See the city through their eyes.</h2>
-      </div>
-
-      <div class="map-shell shell">
-        <div class="map-canvas" id="mapCanvas">
-          <div class="map-grid"></div>
-          <div class="district d1">MANSOUR</div>
-          <div class="district d2">YARMOUK</div>
-          <div class="district d3">KARRADA</div>
-          <div class="district d4">JADRIYA</div>
-          <div class="river"></div>
-          <div class="street s1"></div>
-          <div class="street s2"></div>
-          <div class="street s3"></div>
-          <div class="street s4"></div>
-          <div class="risk-zone zone-a" data-base="84"></div>
-          <div class="risk-zone zone-b" data-base="63"></div>
-          <div class="risk-zone zone-c" data-base="41"></div>
-          <div class="risk-zone zone-d" data-base="76"></div>
-          <button class="sighting sighting-dog" data-kind="Dog" data-count="3" style="--x:28%;--y:42%"><span>3</span></button>
-          <button class="sighting sighting-cat" data-kind="Cats" data-count="6" style="--x:62%;--y:58%"><span>6</span></button>
-          <button class="sighting sighting-dog" data-kind="Dogs" data-count="5" style="--x:74%;--y:31%"><span>5</span></button>
-          <button class="water-point" style="--x:47%;--y:70%" title="Water point"></button>
-
-          <aside class="layer-panel glass-panel">
-            <span class="panel-label">LAYERS</span>
-            <label><input type="checkbox" checked data-layer="risk" /> Risk</label>
-            <label><input type="checkbox" checked data-layer="animals" /> Animals</label>
-            <label><input type="checkbox" checked data-layer="water" /> Water</label>
-            <label><input type="checkbox" checked data-layer="roads" /> Roads</label>
-          </aside>
-
-          <aside class="risk-card glass-panel" id="riskCard">
-            <div class="risk-card-top"><span class="panel-label">ZONE INTELLIGENCE</span><span class="status-dot"></span></div>
-            <h3>Al-Mansour / Zone 18</h3>
-            <div class="risk-score"><strong id="riskScore">84</strong><span>/100<br/>risk score</span></div>
-            <div class="risk-reasons">
-              <span>Heat exposure</span><b id="heatReason">+28</b>
-              <span>Fast traffic</span><b>+22</b>
-              <span>Repeated crossings</span><b>+19</b>
-              <span>Water gap</span><b>+15</b>
-            </div>
-            <div class="recommendation">
-              <span>Recommended intervention</span>
-              <strong id="recommendationText">Deploy shaded water station 180m north.</strong>
-            </div>
-          </aside>
-
-          <div class="time-control glass-panel">
-            <div class="time-header"><span>TIME MODEL</span><strong id="timeLabel">14:00</strong></div>
-            <input id="timeSlider" type="range" min="6" max="22" value="14" step="1" />
-            <div class="time-ticks"><span>06:00</span><span>10:00</span><span>14:00</span><span>18:00</span><span>22:00</span></div>
+          <div class="story-number">03</div>
+          <p class="eyebrow">TIME CHANGES EVERYTHING</p>
+          <h3>The same street can be safe at 8 AM and critical at 2 PM.</h3>
+          <p>The system reacts to time-sensitive conditions instead of producing a static risk label. Heat peaks, traffic flows and water scarcity reshape the map through the day.</p>
+          <div class="time-demo" aria-label="Risk over time">
+            <span>06</span><i></i><span>10</span><i></i><span class="active">14</span><i></i><span>18</span><i></i><span>22</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="action-section shell">
-      <div>
-        <span class="eyebrow">From insight to action</span>
-        <h2>The map should tell responders what to do next.</h2>
-      </div>
-      <div class="action-cards">
-        <article><span>01</span><h3>Detect</h3><p>Combine sightings with heat, roads and water access.</p></article>
-        <article><span>02</span><h3>Prioritize</h3><p>Score zones by urgency instead of treating every pin equally.</p></article>
-        <article><span>03</span><h3>Intervene</h3><p>Recommend the smallest action with the highest welfare impact.</p></article>
-      </div>
-    </section>
-
-    <section class="report-section shell">
-      <div class="report-card">
-        <div>
-          <span class="eyebrow">Citizen signal</span>
-          <h2>One sighting can reveal a pattern.</h2>
-          <p>Report an animal location in under 20 seconds. The system adds it to the risk model instead of leaving it as an isolated report.</p>
+        <div class="story-visual typography-poster">
+          <span class="tiny">ZONE 18 / AL-MANSOUR</span>
+          <strong>46°</strong>
+          <em>SURFACE<br>HEAT</em>
+          <div class="type-bars"><i></i><i></i><i></i><i></i></div>
+          <span class="poster-caption">Critical exposure window<br>13:20—16:40</span>
         </div>
-        <button class="primary-button" id="reportBtnBottom">Report an animal <span>+</span></button>
+      </article>
+    </section>
+
+    <section class="live-map-section" id="live-map">
+      <div class="map-title-row">
+        <div>
+          <p class="eyebrow">04 / LIVE SYSTEM</p>
+          <h2>Read the invisible fence.</h2>
+        </div>
+        <p>Move through time. Toggle the signals. Click an animal cluster to understand what the map sees.</p>
       </div>
+
+      <div class="map-stage">
+        <div id="mainMap" class="main-map"></div>
+
+        <div class="map-toolbar panel">
+          <span class="toolbar-title">SIGNALS</span>
+          <label><input type="checkbox" checked data-layer="risk"><span>Risk field</span></label>
+          <label><input type="checkbox" checked data-layer="animals"><span>Animals</span></label>
+          <label><input type="checkbox" checked data-layer="water"><span>Water</span></label>
+        </div>
+
+        <aside class="zone-card panel" id="zoneCard">
+          <div class="zone-card-head"><span>ZONE INTELLIGENCE</span><i></i></div>
+          <p id="zoneName">Al-Mansour / Zone 18</p>
+          <div class="zone-score"><strong id="zoneScore">84</strong><span>/ 100<br>RISK</span></div>
+          <div class="zone-factors">
+            <div><span>Heat exposure</span><b id="heatValue">+28</b></div>
+            <div><span>Traffic pressure</span><b id="trafficValue">+22</b></div>
+            <div><span>Water gap</span><b>+15</b></div>
+          </div>
+          <div class="intervention">
+            <span>RECOMMENDED ACTION</span>
+            <b id="interventionText">Deploy a shaded water station 180m north.</b>
+          </div>
+        </aside>
+
+        <div class="map-time panel">
+          <div class="map-time-head"><span>TIME MODEL</span><strong id="timeLabel">14:00</strong></div>
+          <input id="timeSlider" type="range" min="6" max="22" value="14" step="1">
+          <div class="map-time-ticks"><span>06</span><span>10</span><span>14</span><span>18</span><span>22</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intervention-section">
+      <div class="section-index">05</div>
+      <div class="intervention-head">
+        <p class="eyebrow">FROM SIGNAL TO ACTION</p>
+        <h2>The map is only useful if it changes what happens next.</h2>
+      </div>
+      <div class="intervention-grid">
+        <article><span>01</span><h3>Detect</h3><p>Gather sightings and environmental signals without turning every report into an isolated pin.</p></article>
+        <article><span>02</span><h3>Prioritize</h3><p>Score zones by urgency and explain exactly which factors are pushing risk upward.</p></article>
+        <article><span>03</span><h3>Intervene</h3><p>Recommend the smallest practical action with the highest animal-welfare impact.</p></article>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div>
+        <p class="eyebrow">CITIZEN SIGNAL</p>
+        <h2>One sighting can reveal a pattern.</h2>
+      </div>
+      <button class="button button-dark" data-open-report>Report an animal <span>↗</span></button>
     </section>
   </main>
 
-  <footer class="footer shell">
-    <span>Invisible Fence / AnimalHack 2026</span>
-    <span>Prototype for urban animal welfare intelligence</span>
+  <footer>
+    <a class="wordmark" href="#top"><span class="wordmark-symbol">IF</span><span>Invisible Fence</span></a>
+    <p>AnimalHack 2026 / Baghdad pilot</p>
+    <p>See the dangers animals cannot.</p>
   </footer>
 
-  <div class="modal" id="reportModal" aria-hidden="true">
-    <div class="modal-backdrop" data-close-modal></div>
-    <div class="modal-card">
-      <button class="modal-close" data-close-modal>×</button>
-      <span class="eyebrow">Quick report</span>
-      <h2>What did you see?</h2>
+  <div class="report-modal" id="reportModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-report></div>
+    <div class="report-sheet" role="dialog" aria-modal="true" aria-labelledby="report-title">
+      <button class="close-report" data-close-report aria-label="Close">×</button>
+      <p class="eyebrow">QUICK FIELD REPORT</p>
+      <h2 id="report-title">What did you see?</h2>
       <form id="reportForm">
-        <label>Animal type<select><option>Dog</option><option>Cat</option><option>Bird</option><option>Other</option></select></label>
-        <label>How many?<input type="number" min="1" value="1" /></label>
-        <label>Situation<select><option>Crossing traffic</option><option>Heat exposure</option><option>No water nearby</option><option>Injured animal</option><option>Other</option></select></label>
-        <label>Location<input type="text" value="Baghdad, Iraq" /></label>
-        <button class="primary-button" type="submit">Add to risk model</button>
+        <div class="form-grid">
+          <label>Animal<select name="animal"><option>Dog</option><option>Cat</option><option>Bird</option><option>Other</option></select></label>
+          <label>Count<input name="count" type="number" min="1" value="1"></label>
+          <label>Situation<select name="situation"><option>Crossing traffic</option><option>Heat exposure</option><option>No water nearby</option><option>Injured animal</option><option>Other</option></select></label>
+          <label>Location<input name="location" type="text" value="Baghdad, Iraq"></label>
+        </div>
+        <label>Notes<textarea name="notes" rows="3" placeholder="Optional details"></textarea></label>
+        <button class="button button-dark" type="submit">Add to risk model <span>→</span></button>
       </form>
-      <div class="form-success" id="formSuccess">Report added to the demo model.</div>
+      <div class="report-success" id="reportSuccess">Report added to the demo risk model.</div>
     </div>
   </div>
 
+  <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
