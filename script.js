@@ -99,7 +99,7 @@ const water={type:'FeatureCollection',features:[
   {type:'Feature',properties:{name:'Water point A'},geometry:{type:'Point',coordinates:[44.351,33.318]}},
   {type:'Feature',properties:{name:'Water point B'},geometry:{type:'Point',coordinates:[44.405,33.291]}}
 ]};
-function rasterStyle(){return{version:8,sources:{osm:{type:'raster',tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OpenStreetMap contributors'}},layers:[{id:'osm',type:'raster',source:'osm',paint:{'raster-opacity':1}}]}}
+function rasterStyle(){return{version:8,glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',sources:{osm:{type:'raster',tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OpenStreetMap contributors'}},layers:[{id:'osm',type:'raster',source:'osm',paint:{'raster-opacity':1}}]}}
 let mainMap;
 function addMapLayers(map){
   map.addSource('risk-zones',{type:'geojson',data:zones});
@@ -108,7 +108,7 @@ function addMapLayers(map){
   map.addSource('animals',{type:'geojson',data:animals});
   map.addLayer({id:'animal-halo',type:'circle',source:'animals',paint:{'circle-radius':['+',14,['*',1.4,['get','count']]],'circle-color':'#ff6b61','circle-opacity':.12}});
   map.addLayer({id:'animal-circles',type:'circle',source:'animals',paint:{'circle-radius':['+',6,['*',1.05,['get','count']]],'circle-color':'#ff6b61','circle-stroke-color':'#f8f7f2','circle-stroke-width':1.3}});
-  map.addLayer({id:'animal-labels',type:'symbol',source:'animals',layout:{'text-field':['to-string',['get','count']],'text-size':9},paint:{'text-color':'#0a0b0d'}});
+  map.addLayer({id:'animal-labels',type:'symbol',source:'animals',layout:{'text-field':['to-string',['get','count']],'text-size':10,'text-font':['Noto Sans Regular'],'text-allow-overlap':true},paint:{'text-color':'#0a0b0d'}});
   map.addSource('water',{type:'geojson',data:water});
   map.addLayer({id:'water-halo',type:'circle',source:'water',paint:{'circle-radius':17,'circle-color':'#55d7f3','circle-opacity':.12}});
   map.addLayer({id:'water-circles',type:'circle',source:'water',paint:{'circle-radius':6,'circle-color':'#55d7f3','circle-stroke-color':'#f8f7f2','circle-stroke-width':1.2}});
