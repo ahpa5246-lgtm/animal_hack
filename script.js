@@ -140,3 +140,63 @@ function openReport(){modal?.classList.add('open');modal?.setAttribute('aria-hid
 function closeReport(){modal?.classList.remove('open');modal?.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open')}
 $$('[data-open-report]').forEach(b=>b.addEventListener('click',openReport));$$('[data-close-report]').forEach(b=>b.addEventListener('click',closeReport));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeReport()});
 $('#reportForm')?.addEventListener('submit',e=>{e.preventDefault();const success=$('#reportSuccess');if(success){success.style.display='flex';setTimeout(()=>{success.style.display='none';closeReport()},1400)}});
+
+// Reference V4: load the final visual layer, move the dog out of the clipped map card,
+// and replace the synthetic hero basemap with real satellite imagery.
+(()=>{
+  if(!document.querySelector('link[data-reference-v4]')){
+    const link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href='reference-v4.css';
+    link.dataset.referenceV4='true';
+    document.head.appendChild(link);
+  }
+
+  const heroMapArt=$('.hero-map-art');
+  const heroComposition=$('.hero-composition');
+  const heroAnimal=heroMapArt?.querySelector('.hero-animal.animal-dog');
+  if(heroMapArt&&heroComposition&&heroAnimal){
+    heroComposition.appendChild(heroAnimal);
+  }
+
+  if(!window.maplibregl||!heroMapArt||$('#heroMap'))return;
+  const heroMapEl=document.createElement('div');
+  heroMapEl.id='heroMap';
+  heroMapEl.setAttribute('aria-hidden','true');
+  heroMapArt.prepend(heroMapEl);
+
+  const heroStyle={
+    version:8,
+    sources:{
+      imagery:{
+        type:'raster',
+        tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+        tileSize:256,
+        attribution:'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics'
+      }
+    },
+    layers:[{
+      id:'imagery',type:'raster',source:'imagery',
+      paint:{'raster-opacity':.94,'raster-saturation':-.16,'raster-brightness-min':.14,'raster-brightness-max':.96,'raster-contrast':.05}
+    }]
+  };
+
+  try{
+    const heroMap=new maplibregl.Map({
+      container:heroMapEl,
+      style:heroStyle,
+      center:[44.3661,33.3152],
+      zoom:11.55,
+      pitch:0,
+      bearing:0,
+      interactive:false,
+      attributionControl:false,
+      fadeDuration:0
+    });
+    heroMap.addControl(new maplibregl.AttributionControl({compact:true}),'bottom-right');
+    heroMap.on('load',()=>heroMap.resize());
+  }catch(err){
+    heroMapEl.remove();
+    console.warn('Hero satellite basemap unavailable; using CSS fallback.',err);
+  }
+})();
