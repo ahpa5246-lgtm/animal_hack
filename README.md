@@ -1,28 +1,21 @@
-# Invisible Fence — Redesign
+# Invisible Fence — AnimalHack 2026
 
-A complete visual redesign for the AnimalHack 2026 project.
+Invisible Fence is an interaction-first spatial intelligence prototype for urban animal welfare in Baghdad.
 
-## Direction
-- Warm editorial / spatial-intelligence aesthetic
-- Full-screen live map as the hero instead of a conventional SaaS dashboard
-- Strong serif display typography paired with restrained mono data labels
-- Cream, forest and lime palette; no neon-AI glassmorphism language
-- Clear storytelling sequence: blind spot → risk model → time model → live system → intervention
+## Current experience
+- **Risk Lens** — move through a stylized urban field to reveal the hidden hazard layer and local causal score.
+- **Causal Story** — scroll through heat, traffic, water access, and intervention as one connected risk narrative.
+- **Intervention Lab** — vary water stations, shade, and crossing warnings to preview modeled risk reduction before dispatch.
+- **Live Baghdad Map** — MapLibre + OpenStreetMap with selectable risk zones, animal clusters, water points, and a time-of-day model.
+- **Field Report Drawer** — add a sighting to the current demo session.
 
-## Features
-- MapLibre + OpenStreetMap powered hero and live map
-- Interactive animal clusters
-- Risk polygons
-- Water points
-- Time-of-day risk simulation
-- Toggleable map signals
-- Citizen reporting drawer
-- Responsive desktop/mobile layout
+## Visual direction
+Editorial spatial-intelligence interface combining restrained dark surfaces with an ivory intervention section, serif/sans typography, high-contrast data labels, and purpose-built interaction instead of generic SaaS cards or glassmorphism.
 
 ## Run in GitHub Codespaces
 ```bash
 python3 -m http.server 8000
 ```
-Then open port 8000 in the browser.
+Open port **8000** and hard-refresh after pulling the latest `main` branch.
 
 No npm install is required.
