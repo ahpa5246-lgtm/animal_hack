@@ -6,15 +6,31 @@
   <meta name="theme-color" content="#2948ff" />
   <title>Invisible Fence — Urban Animal Intelligence</title>
   <meta name="description" content="Invisible Fence turns heat, traffic, water access and animal sightings into explainable urban animal-risk intelligence for Baghdad." />
+  <link rel="canonical" href="https://ahpa5246-lgtm.github.io/animal_hack/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Invisible Fence — Urban Animal Intelligence" />
+  <meta property="og:description" content="Explainable urban animal-risk intelligence for Baghdad: heat, traffic, water access and sightings on one living map." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/ahpa5246-lgtm/animal_hack/main/assets/animal-dog.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Invisible Fence — Urban Animal Intelligence" />
+  <meta name="twitter:description" content="Explainable urban animal-risk intelligence for Baghdad." />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/ahpa5246-lgtm/animal_hack/main/assets/animal-dog.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wdth,wght@75..100,400..700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="enhancements.css" />
+  <link rel="stylesheet" href="reference-v4.css" data-reference-v4="true" />
+  <link rel="stylesheet" href="polish.css" />
+  <link rel="preload" as="image" href="assets/animal-dog.webp" fetchpriority="high" />
   <style>.hero-composition{position:relative}.hero-map-art{position:absolute;overflow:hidden}</style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Invisible Fence","applicationCategory":"Urban animal welfare mapping","operatingSystem":"Web","description":"Explainable urban animal-risk intelligence for Baghdad, combining heat, traffic, water access and animal sightings.","about":{"@type":"Place","name":"Baghdad, Iraq"},"creator":{"@type":"Organization","name":"AnimalHack 2026 Baghdad pilot"}}
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div>
 
@@ -23,16 +39,17 @@
       <span class="brand-mark"><i></i><i></i><i></i></span>
       <span>Invisible Fence</span>
     </a>
-    <nav aria-label="Primary navigation">
+    <nav id="primary-nav" aria-label="Primary navigation">
       <a href="#lens">Risk lens</a>
       <a href="#story">Signals</a>
       <a href="#intervention">Intervention</a>
       <a href="#live-map">Live map</a>
     </nav>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation"><span></span><span></span><span></span></button>
     <button class="nav-action" data-open-report><span>Report sighting</span><b>↗</b></button>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <section class="hero shell" aria-labelledby="hero-title">
       <div class="hero-kicker reveal">BAGHDAD / ANIMALHACK 2026</div>
       <h1 id="hero-title" class="reveal"><span>A CITY MAP</span><br><em>THAT SEES</em><br><span class="hero-last">WHAT ANIMALS CAN'T AVOID.</span></h1>
@@ -80,7 +97,7 @@
           <div class="risk-reveal" id="riskReveal" aria-hidden="true"><div class="risk-field heat-field"></div><div class="risk-field traffic-field"></div><svg class="risk-overlay-lines" viewBox="0 0 1200 680" preserveAspectRatio="none"><path class="hot-route" d="M90 565 C255 488 340 480 505 360 S790 206 1070 235"/><path class="move-route" d="M210 620 C325 478 465 475 630 386 S825 326 1040 385"/><g class="risk-node"><circle cx="340" cy="476" r="12"/><circle cx="630" cy="386" r="10"/><circle cx="805" cy="316" r="14"/><circle cx="1038" cy="384" r="9"/></g></svg></div>
           <div class="map-label label-a"><i></i><span>AL-MANSOUR / 18</span><b>84</b></div><div class="map-label label-b"><i></i><span>KARRADA / 23</span><b>57</b></div><div class="map-label label-c"><i></i><span>YARMOUK / 07</span><b>68</b></div>
           <div class="water-pin pin-a"><span></span><b>W</b></div><div class="water-pin pin-b"><span></span><b>W</b></div><div class="animal-trace trace-a">● ● ●</div><div class="animal-trace trace-b">● ●</div>
-          <div class="lens-cursor" id="lensCursor" aria-hidden="true"><span class="lens-cross x"></span><span class="lens-cross y"></span><div class="lens-readout"><small>LOCAL RISK</small><strong id="lensScore">78</strong><span id="lensCause">HEAT + TRAFFIC</span></div></div>
+          <div class="lens-cursor" id="lensCursor" aria-hidden="true"><span class="lens-cross x"></span><span class="lens-cross y"></span><div class="lens-readout" aria-live="off"><small>LOCAL RISK</small><strong id="lensScore">78</strong><span id="lensCause">HEAT + TRAFFIC</span></div></div>
           <div class="lens-hint"><span>MOVE CURSOR</span><i></i><b>Reveal risk layer</b></div><div class="map-coordinates"><span>33.3152° N</span><span>44.3661° E</span><span>MODEL / 14:00</span></div>
         </div>
       </div>
@@ -113,7 +130,7 @@
       <div class="shell intervention-head reveal"><div><span class="section-index dark">04 / INTERVENTION LAB</span><h2>Test the action<br><em>before the team moves.</em></h2></div><p>Stage a practical response and preview how the modeled corridor changes.</p></div>
       <div class="shell lab-grid reveal">
         <div class="lab-controls"><div class="lab-top"><span>SCENARIO / AL-MANSOUR 18</span><b id="simStatus">DRAFT</b></div><h3>Build an intervention</h3><div class="control-group"><div class="control-label"><span>Water stations</span><b id="waterCount">1</b></div><input id="waterSlider" type="range" min="0" max="4" step="1" value="1" aria-label="Number of water stations"><div class="range-ticks"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span></div></div><div class="toggle-row"><div><span>Temporary shade corridor</span><small>Reduces peak heat exposure.</small></div><button class="switch active" data-sim="shade" aria-pressed="true"><i></i></button></div><div class="toggle-row"><div><span>Crossing warning</span><small>Flags the highest-conflict road edge.</small></div><button class="switch" data-sim="crossing" aria-pressed="false"><i></i></button></div><button class="simulate-btn" id="simulateBtn"><span>Run intervention model</span><b>↗</b></button></div>
-        <div class="lab-output"><div class="simulation-map" id="simulationMap"><svg viewBox="0 0 760 500" preserveAspectRatio="none" aria-hidden="true"><g class="sim-streets"><path d="M-20 390 C120 330 225 360 330 255 S545 145 800 185"/><path d="M85 540 C130 350 300 330 420 245 S560 100 595 -20"/><path d="M-30 150 C150 220 250 125 390 165 S600 270 790 235"/></g><g class="sim-minor"><path d="M60 55L700 445M180 -20L670 520M-20 285L780 315M350 -20L285 520"/></g><path class="sim-corridor" id="simCorridor" d="M85 415 C220 310 300 350 414 255 S585 175 710 215"/></svg><div class="sim-heat h1"></div><div class="sim-heat h2"></div><div class="sim-animal a1"></div><div class="sim-animal a2"></div><div class="sim-animal a3"></div><div class="sim-water w1"></div><div class="sim-water w2"></div><div class="sim-water w3"></div><div class="sim-water w4"></div><div class="sim-crossing" id="simCrossing"><i></i><span>WARNING</span></div><div class="sim-caption"><span>MODELLED CORRIDOR</span><b>18:12</b></div></div><div class="impact-strip"><div><small>PROJECTED RISK</small><strong id="projectedRisk">61</strong><span>−23 pts</span></div><div><small>HEAT</small><strong id="impactHeat">−17%</strong></div><div><small>WATER ACCESS</small><strong id="impactWater">+21%</strong></div><div><small>TRAFFIC</small><strong id="impactTraffic">0%</strong></div></div><div class="confidence"><span>MODEL CONFIDENCE</span><i><b id="confidenceBar"></b></i><strong id="confidenceText">82%</strong></div></div>
+        <div class="lab-output"><div class="simulation-map" id="simulationMap"><svg viewBox="0 0 760 500" preserveAspectRatio="none" aria-hidden="true"><g class="sim-streets"><path d="M-20 390 C120 330 225 360 330 255 S545 145 800 185"/><path d="M85 540 C130 350 300 330 420 245 S560 100 595 -20"/><path d="M-30 150 C150 220 250 125 390 165 S600 270 790 235"/></g><g class="sim-minor"><path d="M60 55L700 445M180 -20L670 520M-20 285L780 315M350 -20L285 520"/></g><path class="sim-corridor" id="simCorridor" d="M85 415 C220 310 300 350 414 255 S585 175 710 215"/></svg><div class="sim-heat h1"></div><div class="sim-heat h2"></div><div class="sim-animal a1"></div><div class="sim-animal a2"></div><div class="sim-animal a3"></div><div class="sim-water w1"></div><div class="sim-water w2"></div><div class="sim-water w3"></div><div class="sim-water w4"></div><div class="sim-crossing" id="simCrossing"><i></i><span>WARNING</span></div><div class="sim-caption"><span>MODELLED CORRIDOR</span><b>18:12</b></div></div><div class="impact-strip" aria-live="polite"><div><small>PROJECTED RISK</small><strong id="projectedRisk">61</strong><span>−23 pts</span></div><div><small>HEAT</small><strong id="impactHeat">−17%</strong></div><div><small>WATER ACCESS</small><strong id="impactWater">+21%</strong></div><div><small>TRAFFIC</small><strong id="impactTraffic">0%</strong></div></div><div class="confidence"><span>MODEL CONFIDENCE</span><i><b id="confidenceBar"></b></i><strong id="confidenceText">82%</strong></div></div>
       </div>
     </section>
 
@@ -138,7 +155,8 @@
 
   <div class="report-modal" id="reportModal" aria-hidden="true"><button class="modal-backdrop" data-close-report aria-label="Close report form"></button><section class="report-sheet" role="dialog" aria-modal="true" aria-labelledby="report-title"><div class="sheet-head"><span>FIELD REPORT / 01</span><button data-close-report aria-label="Close">×</button></div><h2 id="report-title">What did you see?</h2><p>Your report becomes one signal in the local movement model. This prototype stores the entry only in the current demo session.</p><form id="reportForm"><div class="form-row"><label>Animal<select name="animal"><option>Dog</option><option>Cat</option><option>Bird</option><option>Other</option></select></label><label>Count<input name="count" type="number" min="1" value="1"></label></div><label>Situation<select name="situation"><option>Crossing traffic</option><option>Heat exposure</option><option>No water nearby</option><option>Injured animal</option></select></label><label>Location<input name="location" type="text" value="Baghdad, Iraq"></label><label>Notes<textarea name="notes" rows="3" placeholder="Optional field notes"></textarea></label><button class="primary-btn submit" type="submit"><span>Add to demo model</span><b>↗</b></button></form><div class="report-success" id="reportSuccess"><i>✓</i><span>Signal added to the demo model.</span></div></section></div>
 
-  <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
-  <script src="script.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="polish.js" defer></script>
 </body>
 </html>
