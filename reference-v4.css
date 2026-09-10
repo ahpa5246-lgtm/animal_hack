@@ -1,0 +1,208 @@
+/* Reference-match V4 — dog-forward hero, photographic Baghdad atmosphere, realistic map */
+
+:root{
+  --hero-city:url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Baghdad%2C_the_capital_and_largest_city_in_Iraq%2C_pictured_at_night_%28iss073e0134535%29.jpg/1920px-Baghdad%2C_the_capital_and_largest_city_in_Iraq%2C_pictured_at_night_%28iss073e0134535%29.jpg");
+}
+
+/* HERO: match the reference composition instead of a flat blue poster */
+.hero{
+  min-height:720px!important;
+  grid-template-columns:repeat(12,minmax(0,1fr))!important;
+  grid-template-rows:auto auto auto auto 108px!important;
+  column-gap:20px!important;
+  padding-top:30px!important;
+  position:relative!important;
+  isolation:isolate!important;
+}
+.hero::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:-96px calc(50% - 50vw) 0!important;
+  z-index:-3!important;
+  background-image:
+    linear-gradient(90deg,rgba(19,105,222,.88) 0%,rgba(13,100,212,.72) 35%,rgba(5,62,139,.46) 67%,rgba(2,25,55,.70) 100%),
+    linear-gradient(180deg,rgba(16,87,190,.18),rgba(2,27,62,.34)),
+    var(--hero-city)!important;
+  background-size:cover!important;
+  background-position:center 55%!important;
+  background-repeat:no-repeat!important;
+  filter:saturate(1.08) contrast(1.04)!important;
+}
+.hero::after{
+  content:""!important;
+  position:absolute!important;
+  inset:-30px calc(50% - 50vw) 108px!important;
+  z-index:-2!important;
+  pointer-events:none!important;
+  opacity:.92!important;
+  background:
+    radial-gradient(circle at 48% 22%,rgba(255,174,91,.82) 0 2px,rgba(255,174,91,.14) 4px,transparent 11px),
+    radial-gradient(circle at 52% 29%,rgba(255,220,164,.85) 0 2px,rgba(255,220,164,.14) 4px,transparent 12px),
+    radial-gradient(circle at 28% 70%,rgba(255,176,93,.62) 0 2px,transparent 10px),
+    radial-gradient(circle at 84% 73%,rgba(255,197,116,.74) 0 2px,transparent 11px),
+    linear-gradient(180deg,rgba(28,122,244,.08) 0 60%,rgba(0,31,72,.22) 100%)!important;
+}
+
+.hero-kicker{grid-column:1/4!important;grid-row:1!important;margin:0 0 18px!important;position:relative;z-index:20}
+.hero h1{
+  grid-column:1/4!important;
+  grid-row:2!important;
+  max-width:520px!important;
+  font-size:clamp(68px,5.25vw,104px)!important;
+  line-height:.89!important;
+  letter-spacing:-.064em!important;
+  z-index:20!important;
+}
+.hero h1 em{font-family:var(--sans)!important;font-style:normal!important;font-weight:690!important}
+.hero h1 .hero-last{
+  margin-top:9px!important;
+  max-width:6.1em!important;
+  font-family:var(--serif)!important;
+  font-style:italic!important;
+  font-weight:400!important;
+  font-size:.61em!important;
+  line-height:.94!important;
+  letter-spacing:-.055em!important;
+}
+.hero-lede{grid-column:1/4!important;grid-row:3!important;max-width:455px!important;margin:18px 0 0!important;font-size:15px!important;line-height:1.48!important;z-index:20!important}
+.hero-actions{grid-column:1/4!important;grid-row:4!important;margin:22px 0 24px!important;z-index:20!important}
+
+/* stage begins earlier so the dog sits between copy and map, exactly like the reference */
+.hero-composition{
+  grid-column:4/13!important;
+  grid-row:1/5!important;
+  height:610px!important;
+  margin:0!important;
+  position:relative!important;
+  z-index:8!important;
+  overflow:visible!important;
+}
+.hero-map-art{
+  left:31%!important;
+  right:0!important;
+  top:18px!important;
+  height:500px!important;
+  overflow:visible!important;
+  border-radius:34px!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  background:#dfeafa!important;
+  box-shadow:0 28px 70px rgba(3,25,61,.28),0 0 0 1px rgba(255,255,255,.18) inset!important;
+  isolation:isolate!important;
+}
+#heroMap{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  border-radius:inherit;
+  background:#dfeafa;
+}
+#heroMap .maplibregl-canvas{filter:saturate(.72) brightness(1.18) contrast(.90) hue-rotate(2deg)}
+#heroMap .maplibregl-ctrl-attrib{font-size:8px!important;opacity:.55!important;background:rgba(255,255,255,.72)!important}
+#heroMap .maplibregl-ctrl-logo{opacity:.45;transform:scale(.75);transform-origin:left bottom}
+
+/* keep only the risk intelligence overlay above the real basemap */
+.hero-map-art>svg{z-index:3!important;opacity:1!important;pointer-events:none!important}
+.hero-map-art>svg .hero-river,.hero-map-art>svg .hero-roads{display:none!important}
+.hero-risk-route{stroke:#ff715f!important;stroke-width:12!important;opacity:.96!important;filter:drop-shadow(0 0 8px rgba(255,91,72,.88)) drop-shadow(0 0 18px rgba(255,91,72,.30))!important}
+.hero-nodes circle{fill:#ff725f!important;stroke:#fff!important;stroke-width:5!important;filter:drop-shadow(0 0 7px rgba(255,76,56,1)) drop-shadow(0 0 18px rgba(255,82,59,.92))!important}
+.hero-nodes circle:nth-child(2),.hero-nodes circle:nth-child(4){fill:#2e73ff!important;filter:drop-shadow(0 0 7px rgba(42,111,255,1)) drop-shadow(0 0 18px rgba(42,111,255,.92))!important}
+.hero-map-art::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  border-radius:inherit!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 27% 50%,rgba(255,75,54,.62) 0 2%,rgba(255,91,70,.30) 7%,rgba(255,110,87,.10) 14%,transparent 23%),
+    radial-gradient(circle at 69% 43%,rgba(255,79,58,.55) 0 2%,rgba(255,100,79,.25) 7%,transparent 19%),
+    radial-gradient(circle at 55% 70%,rgba(155,85,242,.22) 0 3%,transparent 15%),
+    linear-gradient(180deg,rgba(236,247,255,.13),rgba(224,241,255,.22))!important;
+  box-shadow:inset 0 0 65px rgba(255,255,255,.40)!important;
+}
+.hero-map-art::after{z-index:8!important;top:22px!important;right:20px!important;background:rgba(255,255,255,.91)!important;box-shadow:0 8px 28px rgba(30,71,130,.15)!important}
+
+/* The dog is moved out of the clipped map card by JS and becomes the focal bridge */
+.hero-composition>.hero-animal.animal-dog{
+  display:block!important;
+  left:-2.5%!important;
+  top:16px!important;
+  bottom:auto!important;
+  width:440px!important;
+  height:605px!important;
+  z-index:13!important;
+  background-image:var(--animal-dog)!important;
+  background-repeat:no-repeat!important;
+  background-position:center bottom!important;
+  background-size:contain!important;
+  filter:drop-shadow(0 24px 22px rgba(0,20,48,.28))!important;
+  pointer-events:none!important;
+}
+.hero-composition::after{
+  content:"♡"!important;
+  left:17%!important;
+  top:80px!important;
+  font-family:var(--sans)!important;
+  font-size:58px!important;
+  color:#fff!important;
+  transform:rotate(-12deg)!important;
+  text-shadow:0 2px 13px rgba(0,29,72,.32)!important;
+  z-index:14!important;
+}
+.hero-composition::before{
+  content:"Safer\A Cities\A Happier\A Animals\A ♡"!important;
+  left:2%!important;
+  bottom:64px!important;
+  font-family:var(--serif)!important;
+  font-style:italic!important;
+  font-size:25px!important;
+  line-height:1.03!important;
+  color:#fff!important;
+  transform:rotate(-7deg)!important;
+  text-shadow:0 2px 12px rgba(0,29,72,.28)!important;
+  z-index:14!important;
+}
+
+.map-chip{z-index:9!important;box-shadow:0 12px 30px rgba(5,20,43,.28)!important}
+.chip-a{left:43%!important;top:15%!important}.chip-b{right:6%!important;top:25%!important}.chip-c{left:54%!important;bottom:20%!important}
+.hero-score{right:1.3%!important;bottom:20px!important;width:278px!important;padding:25px 26px 23px!important;border-radius:27px!important;z-index:12!important;box-shadow:0 26px 55px rgba(0,18,44,.38)!important}
+.hero-score strong{font-size:92px!important}
+
+/* crisp reference-like metric ribbon */
+.hero-ticker{grid-column:1/13!important;grid-row:5!important;min-height:108px!important;background:rgba(252,253,255,.98)!important;box-shadow:0 -12px 35px rgba(3,38,92,.10)!important}
+.hero-ticker span{min-height:74px!important}
+
+/* Animal cards — keep the same visual language visible immediately after the hero */
+.animal-context{padding-top:58px!important;padding-bottom:58px!important}
+.animal-context-visuals{height:286px!important;gap:16px!important}
+.animal-card,.animal-context-visuals::after{height:286px!important;border-radius:22px!important}
+.animal-card>div{inset:12px 0 0!important;background-size:contain!important}
+.animal-card::before{font-size:38px!important}
+.animal-context-visuals::after{background:var(--animal-dog) center bottom/contain no-repeat,linear-gradient(145deg,#ffe4df,#ffc9c2)!important}
+
+/* desktop fit matching the supplied 16:9 reference */
+@media(min-width:1281px){
+  .hero{padding-inline:0!important}
+}
+
+@media(max-width:1280px){
+  .hero h1{grid-column:1/5!important;font-size:clamp(62px,6.1vw,92px)!important}
+  .hero-lede,.hero-actions{grid-column:1/5!important}
+  .hero-composition{grid-column:5/13!important;height:570px!important}
+  .hero-map-art{left:23%!important;height:470px!important}
+  .hero-composition>.hero-animal.animal-dog{left:-12%!important;width:390px!important;height:535px!important}
+  .hero-composition::before{display:none!important}
+}
+
+@media(max-width:860px){
+  .hero{display:block!important;min-height:auto!important}
+  .hero-composition{height:500px!important;margin-top:8px!important}
+  .hero-map-art{left:0!important;top:38px!important;height:405px!important;overflow:hidden!important}
+  .hero-composition>.hero-animal.animal-dog{left:-5%!important;top:6px!important;width:275px!important;height:380px!important;z-index:13!important}
+  .hero-composition::after{left:30%!important;top:18px!important;font-size:42px!important}
+  .chip-a{left:47%!important}.chip-b{right:4%!important}.chip-c{display:none!important}
+  .hero-score{width:182px!important;right:8px!important;bottom:18px!important;padding:16px!important}
+  .hero-score strong{font-size:61px!important}
+}
