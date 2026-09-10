@@ -3,133 +3,275 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0d0f12" />
+  <meta name="theme-color" content="#0a0b0d" />
   <title>Invisible Fence — Urban Animal Intelligence</title>
-  <meta name="description" content="Invisible Fence turns heat, traffic, water access and animal sightings into actionable urban animal-risk intelligence." />
+  <meta name="description" content="Invisible Fence turns heat, traffic, water access and animal sightings into explainable urban animal-risk intelligence for Baghdad." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wdth,wght@75..100,400..700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="nav shell" id="top">
-    <a class="brand" href="#top"><span class="brand-orb">IF</span><b>Invisible Fence</b></a>
-    <nav>
-      <a href="#system">How it works</a>
-      <a href="#signals">Signals</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <header class="site-nav shell" id="top">
+    <a class="brand" href="#top" aria-label="Invisible Fence home">
+      <span class="brand-mark"><i></i><i></i><i></i></span>
+      <span>Invisible Fence</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#story">Method</a>
+      <a href="#intervention">Intervention lab</a>
       <a href="#live-map">Live map</a>
     </nav>
-    <button class="gradient-button small" data-open-report>Report sighting</button>
+    <button class="nav-action" data-open-report><span>Report a sighting</span><b>↗</b></button>
   </header>
 
   <main>
-    <section class="hero shell">
+    <section class="hero shell" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <div class="proof"><span class="proof-stars">✦ ✦ ✦ ✦ ✦</span><span>Baghdad pilot · AnimalHack 2026</span></div>
-        <h1>People who care about animals need <span>better city signals.</span></h1>
-        <p class="hero-lede">Heat, traffic, water access and movement patterns already shape where stray animals survive. Invisible Fence turns those signals into one map responders can actually use.</p>
-        <div class="hero-cta-row">
-          <a class="search-cta" href="#live-map"><span>Explore Baghdad risk intelligence</span><b>Open map</b></a>
+        <div class="eyebrow reveal"><span class="status-dot"></span> BAGHDAD PILOT / ANIMALHACK 2026</div>
+        <h1 id="hero-title" class="reveal">A city map that sees<br><em>what animals can’t avoid.</em></h1>
+        <p class="hero-lede reveal">Invisible Fence turns heat, traffic, missing water access and repeated sightings into a living risk model—so responders can act before a dangerous corridor becomes a casualty.</p>
+        <div class="hero-actions reveal">
+          <a class="primary-btn" href="#lens"><span>Try the Risk Lens</span><b>↓</b></a>
+          <a class="text-link" href="#story">See how the model thinks <span>↗</span></a>
         </div>
-        <div class="trust-row"><span>✓ Heat-aware</span><span>✓ Traffic-aware</span><span>✓ Water-aware</span></div>
+        <div class="micro-proof reveal">
+          <div><b>04</b><span>urban signals</span></div>
+          <div><b>03</b><span>pilot districts</span></div>
+          <div><b>01</b><span>explainable score</span></div>
+        </div>
       </div>
 
-      <div class="hero-visual">
-        <div id="heroMap" class="hero-map"></div>
-        <div class="hero-visual-overlay"></div>
-        <div class="hero-chip chip-a"><i></i><span>ZONE 18</span><b>84</b></div>
-        <div class="hero-chip chip-b"><i></i><span>WATER GAP</span><b>1.4 km</b></div>
-        <div class="hero-chip chip-c"><i></i><span>SIGHTINGS</span><b>17</b></div>
-        <div class="hero-risk-card">
-          <span>LIVE RISK INDEX</span>
-          <strong>84</strong>
-          <p>Heat + crossing exposure</p>
-          <div><i></i></div>
+      <div class="hero-aside reveal" aria-label="Live risk preview">
+        <div class="aside-head"><span>LIVE FIELD NOTE</span><small>14:00 / 33.315°N</small></div>
+        <div class="aside-score"><strong>84</strong><span>HIGH<br>RISK</span></div>
+        <p>Heat pressure is peaking while the nearest reliable water point sits outside the observed movement corridor.</p>
+        <div class="mini-bars">
+          <div><span>Heat</span><i><b style="--w:91%"></b></i><em>+28</em></div>
+          <div><span>Traffic</span><i><b style="--w:73%"></b></i><em>+22</em></div>
+          <div><span>Water gap</span><i><b style="--w:54%"></b></i><em>+15</em></div>
+        </div>
+      </div>
+
+      <div class="hero-ticker" aria-hidden="true"><span>HEAT</span><i></i><span>TRAFFIC</span><i></i><span>WATER</span><i></i><span>MOVEMENT</span><i></i><span>EXPLAIN → INTERVENE</span></div>
+    </section>
+
+    <section class="lens-section" id="lens">
+      <div class="shell lens-head reveal">
+        <div>
+          <span class="section-index">01 / RISK LENS</span>
+          <h2>Don’t look at the city.<br><em>Look through the risk.</em></h2>
+        </div>
+        <p>Move across the field. The lens reveals the invisible layer created by heat exposure, crossing pressure, water distance and observed animal movement.</p>
+      </div>
+
+      <div class="lens-wrap shell reveal">
+        <div class="risk-lens" id="riskLens" tabindex="0" aria-label="Interactive urban animal risk lens">
+          <div class="map-base" aria-hidden="true">
+            <svg viewBox="0 0 1200 680" preserveAspectRatio="none">
+              <g class="roads major">
+                <path d="M-40 520 C220 410 310 445 520 290 S870 110 1240 180" />
+                <path d="M110 720 C220 470 460 470 640 340 S830 160 920 -40" />
+                <path d="M-20 210 C190 270 350 170 520 205 S790 350 1240 300" />
+              </g>
+              <g class="roads minor">
+                <path d="M80 80 C210 210 320 230 455 175 S700 60 1110 70" />
+                <path d="M40 615 C250 590 390 545 545 500 S850 430 1190 510" />
+                <path d="M260 -20 C245 155 320 260 420 360 S520 590 490 720" />
+                <path d="M710 -40 C690 180 755 255 850 355 S995 560 1040 720" />
+                <path d="M-30 385 C210 330 370 390 560 405 S880 350 1230 395" />
+              </g>
+              <g class="river"><path d="M655 -40 C585 100 705 200 610 320 S640 520 560 730"/></g>
+              <g class="blocks">
+                <path d="M126 106h170v86H126zM340 84h142v72H340zM900 104h185v96H900zM1008 235h126v88h-126zM96 306h148v100H96zM285 300h150v112H285zM724 448h160v104H724zM928 486h186v90H928z"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="risk-reveal" id="riskReveal" aria-hidden="true">
+            <div class="risk-field heat-field"></div>
+            <div class="risk-field traffic-field"></div>
+            <svg class="risk-overlay-lines" viewBox="0 0 1200 680" preserveAspectRatio="none">
+              <path class="hot-route" d="M90 565 C255 488 340 480 505 360 S790 206 1070 235"/>
+              <path class="move-route" d="M210 620 C325 478 465 475 630 386 S825 326 1040 385"/>
+              <g class="risk-node"><circle cx="340" cy="476" r="12"/><circle cx="630" cy="386" r="10"/><circle cx="805" cy="316" r="14"/><circle cx="1038" cy="384" r="9"/></g>
+            </svg>
+          </div>
+
+          <div class="map-label label-a"><i></i><span>AL-MANSOUR / 18</span><b>84</b></div>
+          <div class="map-label label-b"><i></i><span>KARRADA / 23</span><b>57</b></div>
+          <div class="map-label label-c"><i></i><span>YARMOUK / 07</span><b>68</b></div>
+          <div class="water-pin pin-a"><span></span><b>W</b></div>
+          <div class="water-pin pin-b"><span></span><b>W</b></div>
+          <div class="animal-trace trace-a">● ● ●</div>
+          <div class="animal-trace trace-b">● ●</div>
+
+          <div class="lens-cursor" id="lensCursor" aria-hidden="true">
+            <span class="lens-cross x"></span><span class="lens-cross y"></span>
+            <div class="lens-readout"><small>LOCAL RISK</small><strong id="lensScore">78</strong><span id="lensCause">HEAT + TRAFFIC</span></div>
+          </div>
+
+          <div class="lens-hint"><span>MOVE CURSOR</span><i></i><b>Reveal risk layer</b></div>
+          <div class="map-coordinates"><span>33.3152° N</span><span>44.3661° E</span><span>MODEL / 14:00</span></div>
         </div>
       </div>
     </section>
 
-    <section class="system shell" id="system">
-      <div class="system-kicker">SPATIAL INTELLIGENCE FOR ANIMAL WELFARE</div>
-      <h2>Use <u>one platform</u> for every signal that shapes urban survival.</h2>
-      <div class="system-benefits"><span>✓ Prioritize the highest-risk zones</span><span>✓ Explain why risk is rising</span><span>✓ Recommend the next intervention</span></div>
-      <a class="gradient-button" href="#live-map">Explore the system</a>
+    <section class="story shell" id="story">
+      <aside class="story-intro reveal">
+        <span class="section-index">02 / CAUSAL STORY</span>
+        <h2>A score should never be a black box.</h2>
+        <p>The interface explains what is changing, why it matters, and what can be done next.</p>
+        <div class="story-progress"><i id="storyProgress"></i></div>
+      </aside>
 
-      <div class="product-grid">
-        <article class="product-card risk-engine">
-          <div class="mock-window">
-            <div class="mock-title"><span>Risk composition</span><small>14:00</small></div>
-            <div class="bar-row"><span>Heat</span><i><b style="width:86%"></b></i><em>+28</em></div>
-            <div class="bar-row"><span>Traffic</span><i><b style="width:68%"></b></i><em>+22</em></div>
-            <div class="bar-row"><span>Water</span><i><b style="width:46%"></b></i><em>+15</em></div>
-            <div class="bar-row"><span>Movement</span><i><b style="width:59%"></b></i><em>+19</em></div>
-          </div>
-          <div class="product-copy"><h3>Understand the risk, not just the pin.</h3><p>Each zone combines environmental pressure and repeated sightings into an explainable score.</p></div>
+      <div class="story-chapters">
+        <article class="chapter active" data-story="heat" data-score="84">
+          <div class="chapter-no">01</div>
+          <div class="chapter-copy"><small>14:00 / HEAT</small><h3>The asphalt becomes the first hazard.</h3><p>Midday exposure raises surface temperature and pushes animals toward narrow pockets of shade, concentrating movement near roads.</p></div>
+          <div class="chapter-viz heat-viz"><span></span><span></span><span></span><div class="temp">47<sup>°C</sup><small>surface estimate</small></div></div>
         </article>
-
-        <article class="product-card intervention-engine">
-          <div class="mock-window action-window">
-            <div class="action-status"><span><i></i> Active zone</span><b>AL-MANSOUR 18</b></div>
-            <small>Recommended intervention</small>
-            <strong>Shade + water</strong>
-            <p>Deploy 180m north of the corridor to reduce peak heat exposure.</p>
-            <div class="impact-row"><span>Expected coverage</span><b>14 animals</b></div>
-          </div>
-          <div class="product-copy"><h3>Turn a warning into the next best action.</h3><p>The system suggests practical interventions instead of stopping at detection.</p></div>
+        <article class="chapter" data-story="traffic" data-score="76">
+          <div class="chapter-no">02</div>
+          <div class="chapter-copy"><small>17:30 / TRAFFIC</small><h3>Then the safe route becomes a crossing.</h3><p>Rush-hour flow overlaps the movement corridor. The same path that worked at noon becomes a high-conflict edge.</p></div>
+          <div class="chapter-viz traffic-viz"><div class="road"><i></i><i></i><i></i><i></i></div><div class="crossing-path"></div><span class="pulse p1"></span><span class="pulse p2"></span></div>
+        </article>
+        <article class="chapter" data-story="water" data-score="69">
+          <div class="chapter-no">03</div>
+          <div class="chapter-copy"><small>18:10 / WATER</small><h3>The nearest resource is on the wrong side.</h3><p>A water point may be geographically close but behaviorally inaccessible. Distance alone is not enough; route exposure matters.</p></div>
+          <div class="chapter-viz water-viz"><div class="distance"><strong>1.4</strong><span>KM</span></div><i class="water-route"></i><b class="animal-dot"></b><b class="water-dot"></b></div>
+        </article>
+        <article class="chapter" data-story="action" data-score="51">
+          <div class="chapter-no">04</div>
+          <div class="chapter-copy"><small>18:12 / ACTION</small><h3>So the intervention changes the route—not just the score.</h3><p>Place shade and water where the movement corridor can actually reach them, then re-run the local risk model before dispatch.</p></div>
+          <div class="chapter-viz action-viz"><div class="before-after"><span>84<small>before</small></span><i>→</i><span>51<small>after</small></span></div><div class="action-chip">SHADE + WATER / 180 M NORTH</div></div>
         </article>
       </div>
     </section>
 
-    <section class="signals shell" id="signals">
-      <div class="signals-head"><span>THE CITY BECOMES DATA</span><h2>From scattered sightings to a living model of risk.</h2><p>Every layer adds context. Together they reveal the invisible corridors animals move through every day.</p></div>
-      <div class="signal-gallery">
-        <article class="signal-card heat-card"><div class="signal-art"><span class="heat-orb h1"></span><span class="heat-orb h2"></span><div class="signal-grid"></div></div><div><small>01 / HEAT</small><h3>Exposure changes by the hour.</h3></div></article>
-        <article class="signal-card movement-card"><div class="signal-art"><svg viewBox="0 0 500 300" aria-hidden="true"><path d="M20 235 C130 55, 220 260, 330 92 S470 52, 492 130"/><path d="M15 160 C105 65, 185 180, 280 125 S402 224, 490 54"/></svg><span class="movement-dot m1"></span><span class="movement-dot m2"></span><span class="movement-dot m3"></span></div><div><small>02 / MOVEMENT</small><h3>Repeated crossings become corridors.</h3></div></article>
-        <article class="signal-card water-card"><div class="signal-art water-art"><div class="distance-ring"><b>1.4</b><span>KM</span></div><div class="water-point"></div><div class="animal-point"></div><i class="distance-line"></i></div><div><small>03 / WATER</small><h3>Distance can become a welfare risk.</h3></div></article>
+    <section class="intervention" id="intervention">
+      <div class="shell intervention-head reveal">
+        <div><span class="section-index dark">03 / INTERVENTION LAB</span><h2>Test the action<br><em>before the team moves.</em></h2></div>
+        <p>Most dashboards stop at “high risk.” Invisible Fence lets responders stage a practical intervention and preview the modeled effect on the corridor.</p>
+      </div>
+
+      <div class="shell lab-grid reveal">
+        <div class="lab-controls">
+          <div class="lab-top"><span>SCENARIO / AL-MANSOUR 18</span><b id="simStatus">DRAFT</b></div>
+          <h3>Build an intervention</h3>
+          <div class="control-group">
+            <div class="control-label"><span>Water stations</span><b id="waterCount">1</b></div>
+            <input id="waterSlider" type="range" min="0" max="4" step="1" value="1" aria-label="Number of water stations">
+            <div class="range-ticks"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span></div>
+          </div>
+          <div class="toggle-row">
+            <div><span>Temporary shade corridor</span><small>Reduces peak heat exposure along the observed path.</small></div>
+            <button class="switch active" data-sim="shade" aria-pressed="true"><i></i></button>
+          </div>
+          <div class="toggle-row">
+            <div><span>Crossing warning</span><small>Flags the highest-conflict road edge for field teams.</small></div>
+            <button class="switch" data-sim="crossing" aria-pressed="false"><i></i></button>
+          </div>
+          <button class="simulate-btn" id="simulateBtn"><span>Run intervention model</span><b>↗</b></button>
+        </div>
+
+        <div class="lab-output">
+          <div class="simulation-map" id="simulationMap">
+            <svg viewBox="0 0 760 500" preserveAspectRatio="none" aria-hidden="true">
+              <g class="sim-streets"><path d="M-20 390 C120 330 225 360 330 255 S545 145 800 185"/><path d="M85 540 C130 350 300 330 420 245 S560 100 595 -20"/><path d="M-30 150 C150 220 250 125 390 165 S600 270 790 235"/></g>
+              <g class="sim-minor"><path d="M60 55L700 445M180 -20L670 520M-20 285L780 315M350 -20L285 520"/></g>
+              <path class="sim-corridor" id="simCorridor" d="M85 415 C220 310 300 350 414 255 S585 175 710 215"/>
+            </svg>
+            <div class="sim-heat h1"></div><div class="sim-heat h2"></div>
+            <div class="sim-animal a1"></div><div class="sim-animal a2"></div><div class="sim-animal a3"></div>
+            <div class="sim-water w1"></div><div class="sim-water w2"></div><div class="sim-water w3"></div><div class="sim-water w4"></div>
+            <div class="sim-crossing" id="simCrossing"><i></i><span>WARNING</span></div>
+            <div class="sim-caption"><span>MODELLED CORRIDOR</span><b>18:12</b></div>
+          </div>
+          <div class="impact-summary">
+            <div class="impact-score"><small>PROJECTED RISK</small><strong id="projectedRisk">61</strong><span>−23 pts</span></div>
+            <div class="impact-factors">
+              <div><span>Heat exposure</span><b id="impactHeat">−17%</b></div>
+              <div><span>Water accessibility</span><b id="impactWater">+42%</b></div>
+              <div><span>Crossing conflict</span><b id="impactTraffic">0%</b></div>
+            </div>
+            <div class="confidence"><span>MODEL CONFIDENCE</span><i><b id="confidenceBar"></b></i><strong id="confidenceText">82%</strong></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="live shell" id="live-map">
-      <div class="live-head"><div><span>LIVE BAGHDAD PILOT</span><h2>Read the invisible fence.</h2></div><p>Move through time, toggle layers, and select animal clusters. The interface updates the same underlying risk model instead of showing a static demo.</p></div>
-      <div class="map-stage">
+      <div class="live-head reveal">
+        <div><span class="section-index">04 / LIVE SYSTEM</span><h2>The whole city,<br><em>without the dashboard noise.</em></h2></div>
+        <p>One operational view. Toggle only the signal you need, scrub through time, and inspect an animal cluster or risk zone without leaving the map.</p>
+      </div>
+
+      <div class="map-stage reveal">
         <div id="mainMap" class="main-map"></div>
-        <div class="map-shade"></div>
-        <div class="layer-box panel">
-          <small>SIGNALS</small>
-          <label><input type="checkbox" checked data-layer="risk"><span>Risk field</span></label>
-          <label><input type="checkbox" checked data-layer="animals"><span>Animals</span></label>
-          <label><input type="checkbox" checked data-layer="water"><span>Water</span></label>
+        <div class="map-vignette"></div>
+        <div class="map-topbar panel">
+          <span>INVISIBLE FENCE / BAGHDAD</span>
+          <div class="map-tabs"><button class="active" data-layer-mode="risk">RISK</button><button data-layer-mode="animals">ANIMALS</button><button data-layer-mode="water">WATER</button></div>
+          <b><i></i> LIVE MODEL</b>
         </div>
         <aside class="zone-panel panel" id="zoneCard">
-          <div class="zone-top"><small>ZONE INTELLIGENCE</small><i></i></div>
-          <h3 id="zoneName">Al-Mansour / Zone 18</h3>
+          <div class="zone-meta"><span>SELECTED ZONE</span><b id="zoneId">18 / 03</b></div>
+          <h3 id="zoneName">Al-Mansour</h3>
           <div class="zone-score"><strong id="zoneScore">84</strong><span>/100<br>RISK</span></div>
           <div class="factor"><span>Heat exposure</span><b id="heatValue">+28</b></div>
           <div class="factor"><span>Traffic pressure</span><b id="trafficValue">+22</b></div>
-          <div class="factor"><span>Water gap</span><b>+15</b></div>
-          <div class="recommended"><small>RECOMMENDED ACTION</small><b id="interventionText">Deploy a shaded water station 180m north.</b></div>
+          <div class="factor"><span>Water gap</span><b id="waterValue">+15</b></div>
+          <div class="recommendation"><small>NEXT BEST ACTION</small><p id="interventionText">Deploy a shaded water station 180 m north of the observed corridor.</p></div>
         </aside>
-        <div class="time-panel panel"><div><small>TIME MODEL</small><b id="timeLabel">14:00</b></div><input id="timeSlider" type="range" min="6" max="22" value="14" step="1"><div class="ticks"><span>06</span><span>10</span><span>14</span><span>18</span><span>22</span></div></div>
+        <div class="time-dock panel">
+          <div><span>TIME MODEL</span><b id="timeLabel">14:00</b></div>
+          <input id="timeSlider" type="range" min="6" max="22" value="14" step="1" aria-label="Time of day">
+          <div class="time-ticks"><span>06</span><span>10</span><span>14</span><span>18</span><span>22</span></div>
+        </div>
+        <div class="map-side-note"><span>CLICK A ZONE</span><i></i><b>Read the cause</b></div>
       </div>
     </section>
 
-    <section class="closing shell">
-      <div><span>ONE SIGHTING CAN REVEAL A PATTERN</span><h2>Help the map see what the city misses.</h2></div>
-      <button class="gradient-button" data-open-report>Report an animal</button>
+    <section class="evidence shell reveal">
+      <span class="section-index">05 / SYSTEM PRINCIPLE</span>
+      <blockquote>“A useful animal-welfare map should not merely point at danger. It should explain <em>why</em> danger is rising—and make the next intervention testable.”</blockquote>
+      <div class="evidence-row"><span>EXPLAINABLE</span><i></i><span>SPATIAL</span><i></i><span>TIME-AWARE</span><i></i><span>ACTIONABLE</span></div>
+    </section>
+
+    <section class="closing">
+      <div class="shell closing-inner reveal">
+        <div><span>FIELD INPUT → CITY INTELLIGENCE</span><h2>One sighting can reveal<br><em>a pattern the city missed.</em></h2></div>
+        <button class="closing-action" data-open-report><span>Report an animal</span><b>↗</b></button>
+      </div>
     </section>
   </main>
 
-  <footer class="shell"><a class="brand" href="#top"><span class="brand-orb">IF</span><b>Invisible Fence</b></a><span>AnimalHack 2026 · Baghdad pilot</span></footer>
+  <footer class="site-footer shell">
+    <a class="brand" href="#top"><span class="brand-mark"><i></i><i></i><i></i></span><span>Invisible Fence</span></a>
+    <p>Spatial intelligence for urban animal welfare.</p>
+    <span>AnimalHack 2026 / Baghdad pilot</span>
+  </footer>
 
   <div class="report-modal" id="reportModal" aria-hidden="true">
-    <div class="modal-backdrop" data-close-report></div>
-    <div class="report-sheet" role="dialog" aria-modal="true">
-      <button class="close-report" data-close-report>×</button>
-      <span>QUICK FIELD REPORT</span><h2>What did you see?</h2>
-      <form id="reportForm"><div class="form-grid"><label>Animal<select><option>Dog</option><option>Cat</option><option>Bird</option><option>Other</option></select></label><label>Count<input type="number" min="1" value="1"></label><label>Situation<select><option>Crossing traffic</option><option>Heat exposure</option><option>No water nearby</option><option>Injured animal</option></select></label><label>Location<input type="text" value="Baghdad, Iraq"></label></div><label>Notes<textarea rows="3" placeholder="Optional details"></textarea></label><button class="gradient-button" type="submit">Add to risk model</button></form>
-      <div class="report-success" id="reportSuccess">Report added to the demo risk model.</div>
-    </div>
+    <button class="modal-backdrop" data-close-report aria-label="Close report form"></button>
+    <section class="report-sheet" role="dialog" aria-modal="true" aria-labelledby="report-title">
+      <div class="sheet-head"><span>FIELD REPORT / 01</span><button data-close-report aria-label="Close">×</button></div>
+      <h2 id="report-title">What did you see?</h2>
+      <p>Your report becomes one signal in the local movement model. This prototype stores the entry only in the current demo session.</p>
+      <form id="reportForm">
+        <div class="form-row"><label>Animal<select name="animal"><option>Dog</option><option>Cat</option><option>Bird</option><option>Other</option></select></label><label>Count<input name="count" type="number" min="1" value="1"></label></div>
+        <label>Situation<select name="situation"><option>Crossing traffic</option><option>Heat exposure</option><option>No water nearby</option><option>Injured animal</option></select></label>
+        <label>Location<input name="location" type="text" value="Baghdad, Iraq"></label>
+        <label>Notes<textarea name="notes" rows="3" placeholder="Optional field notes"></textarea></label>
+        <button class="primary-btn submit" type="submit"><span>Add to demo model</span><b>↗</b></button>
+      </form>
+      <div class="report-success" id="reportSuccess"><i>✓</i><span>Signal added to the demo model.</span></div>
+    </section>
   </div>
 
   <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
