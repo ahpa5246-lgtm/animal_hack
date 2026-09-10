@@ -1,0 +1,135 @@
+/* Invisible Fence — front-end polish layer
+   Accessibility, focus, motion-safety, responsive and micro-interaction refinements.
+   Loaded last so it can refine (not replace) styles.css / enhancements.css / reference-v4.css */
+
+:root{
+  --focus-ring:#dafe67;
+  --ease-out:cubic-bezier(.22,.7,.32,1);
+}
+
+/* ---------- 1. Keyboard accessibility ---------- */
+.skip-link{
+  position:fixed;left:16px;top:-100px;z-index:2000;
+  padding:12px 20px;border-radius:100px;
+  background:#fff;color:#0a4fe0;font:650 13px/1 var(--sans);
+  text-decoration:none;box-shadow:0 12px 34px rgba(3,25,61,.28);
+  transition:top .22s var(--ease-out);
+}
+.skip-link:focus{top:16px}
+
+a:focus-visible,button:focus-visible,input:focus-visible,
+select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
+  outline:3px solid var(--focus-ring);
+  outline-offset:3px;
+  border-radius:6px;
+}
+.risk-lens:focus-visible{outline-offset:-3px}
+:focus:not(:focus-visible){outline:none}
+
+/* keyboard users get a hint that the lens is operable with arrow keys */
+.risk-lens:focus-visible .lens-hint span::after{content:" / ARROW KEYS"}
+
+/* ---------- 2. Motion safety ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+  .reveal{opacity:1!important;transform:none!important}
+  .cursor-dot{display:none!important}
+}
+/* never leave content hidden if JS or the observer fails */
+.no-js .reveal,html:not(.js) .reveal{opacity:1;transform:none}
+
+/* ---------- 3. Nav: current-section state + mobile ---------- */
+.site-nav nav a{position:relative;padding-block:6px;transition:opacity .2s var(--ease-out)}
+.site-nav nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:currentColor;transform:scaleX(0);transform-origin:left;
+  transition:transform .28s var(--ease-out);
+}
+.site-nav nav a:hover::after,.site-nav nav a[aria-current="true"]::after{transform:scaleX(1)}
+.site-nav nav a[aria-current="true"]{opacity:1}
+
+.nav-toggle{
+  display:none;justify-self:end;width:44px;height:44px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.55);background:transparent;color:#fff;cursor:pointer;
+}
+.nav-toggle span{display:block;width:18px;height:1.5px;margin:4px auto;background:#fff;transition:.25s var(--ease-out)}
+.site-nav.open .nav-toggle span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.site-nav.open .nav-toggle span:nth-child(2){opacity:0}
+.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+
+@media (max-width:860px){
+  .site-nav{grid-template-columns:1fr auto!important}
+  .nav-toggle{display:block}
+  .site-nav .nav-action{display:none}
+  .site-nav nav{
+    position:absolute;left:0;right:0;top:100%;
+    flex-direction:column;gap:2px;padding:14px 20px 20px;
+    background:rgba(7,57,133,.94);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.18);
+    opacity:0;visibility:hidden;transform:translateY(-8px);
+    transition:.24s var(--ease-out);
+  }
+  .site-nav.open nav{opacity:1;visibility:visible;transform:none}
+  .site-nav nav a{font-size:15px;padding:12px 0}
+}
+
+/* ---------- 4. Touch + small-screen ergonomics ---------- */
+@media (hover:none){
+  .cursor-dot{display:none}
+  .lens-hint span{font-size:10px}
+  .lens-hint b::after{content:" (tap & drag)"}
+}
+button,.primary-btn,.nav-action,.panel-report,.switch{min-height:44px}
+input[type="range"]{touch-action:pan-y}
+@media (max-width:520px){
+  :root{--shell:min(1280px,calc(100vw - 32px))}
+  .impact-strip{grid-template-columns:repeat(2,1fr)!important;gap:12px!important}
+  .hero-ticker{overflow-x:auto;scrollbar-width:none}
+  .hero-ticker::-webkit-scrollbar{display:none}
+}
+
+/* ---------- 5. Live values read calmly ---------- */
+#lensScore,#projectedRisk,#zoneScore,#confidenceText,#timeLabel{
+  font-variant-numeric:tabular-nums;
+  transition:color .2s var(--ease-out);
+}
+.value-flash{color:var(--lime)!important}
+.sr-only{
+  position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+
+/* ---------- 6. Forms & modal ---------- */
+.report-sheet input,.report-sheet select,.report-sheet textarea{
+  transition:border-color .2s var(--ease-out),box-shadow .2s var(--ease-out);
+}
+.report-sheet input:focus,.report-sheet select:focus,.report-sheet textarea:focus{
+  box-shadow:0 0 0 3px rgba(41,72,255,.16);
+}
+.report-modal[aria-hidden="true"]{visibility:hidden}
+.report-modal[aria-hidden="false"]{visibility:visible}
+.report-log{margin-top:18px;display:grid;gap:8px}
+.report-log:empty{display:none}
+.report-log li{
+  list-style:none;display:flex;justify-content:space-between;gap:12px;
+  padding:10px 12px;border-radius:12px;
+  background:rgba(41,72,255,.06);font:500 12px/1.3 var(--mono);
+}
+
+/* ---------- 7. Media & loading ---------- */
+img,svg{max-width:100%}
+.main-map,.hero-map-art{background-image:linear-gradient(110deg,#e6eefb 30%,#f3f7ff 50%,#e6eefb 70%);background-size:250% 100%}
+.main-map:not(.ready){animation:if-shimmer 1.5s linear infinite}
+@keyframes if-shimmer{to{background-position:-250% 0}}
+
+/* ---------- 8. High contrast / forced colors ---------- */
+@media (forced-colors:active){
+  .grain,.cursor-dot{display:none}
+  .primary-btn,.nav-action,.switch{border:1px solid ButtonText}
+}
