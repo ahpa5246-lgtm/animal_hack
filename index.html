@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invisible Fence — Urban Animal Intelligence</title>
+  <meta name="description" content="Invisible Fence maps hidden urban risks for stray animals and recommends interventions before harm happens." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="nav shell">
+    <a class="brand" href="#top" aria-label="Invisible Fence home">
+      <span class="brand-mark">IF</span>
+      <span class="brand-copy"><b>Invisible Fence</b><small>Urban Animal Intelligence</small></span>
+    </a>
+    <nav>
+      <a href="#story">Why it matters</a>
+      <a href="#map">Risk map</a>
+      <button class="ghost-button" id="reportBtn">Report animal</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-grid"></div>
+      <div class="hero-orbit orbit-one"></div>
+      <div class="hero-orbit orbit-two"></div>
+      <div class="hero-copy">
+        <span class="eyebrow">Urban animal intelligence / Baghdad pilot</span>
+        <h1>The city has <em>invisible danger zones.</em></h1>
+        <p>We combine citizen sightings, heat, traffic, water access and movement patterns to show where stray animals are most at risk — before the next emergency happens.</p>
+        <div class="hero-actions">
+          <a class="primary-button" href="#map">Explore the live map <span>↘</span></a>
+          <button class="text-button" data-scroll="#story">See how it works</button>
+        </div>
+      </div>
+
+      <div class="city-visual" aria-hidden="true">
+        <div class="sun-glow"></div>
+        <div class="skyline skyline-back"></div>
+        <div class="skyline skyline-front"></div>
+        <div class="road road-a"></div>
+        <div class="road road-b"></div>
+        <div class="heat heat-a"></div>
+        <div class="heat heat-b"></div>
+        <div class="heat heat-c"></div>
+        <div class="route route-one"></div>
+        <div class="route route-two"></div>
+        <div class="animal-dot dog-dot"><span>DOG / 3</span></div>
+        <div class="animal-dot cat-dot"><span>CATS / 6</span></div>
+        <div class="water-dot"><span>WATER</span></div>
+        <div class="hero-meter">
+          <span>LIVE RISK INDEX</span>
+          <strong>82</strong>
+          <small>High heat + crossing exposure</small>
+        </div>
+      </div>
+
+      <div class="hero-caption">
+        <span>01</span>
+        <p>What looks like an ordinary street to us can be a survival corridor to them.</p>
+      </div>
+    </section>
+
+    <section class="story shell" id="story">
+      <article class="story-row">
+        <div class="story-number">01</div>
+        <div class="story-copy">
+          <span class="eyebrow">What we don't see</span>
+          <h2>A street can be safe for us and deadly for them.</h2>
+          <p>Heat stress, fast traffic, missing water and repeated crossings often overlap. Invisible Fence turns those signals into one readable risk layer.</p>
+        </div>
+        <div class="story-panel risk-panel">
+          <span class="panel-label">AL-MANSOUR / ZONE 18</span>
+          <strong>Critical after 14:00</strong>
+          <div class="metric"><span>Surface heat</span><b>46°C</b></div>
+          <div class="metric"><span>Water distance</span><b>1.4 km</b></div>
+          <div class="metric"><span>Crossing frequency</span><b>High</b></div>
+        </div>
+      </article>
+
+      <article class="story-row reverse">
+        <div class="story-number">02</div>
+        <div class="story-copy">
+          <span class="eyebrow">The city becomes data</span>
+          <h2>Not another pin map. A living model of risk.</h2>
+          <p>The map changes with time of day, environmental conditions and new sightings, revealing corridors where animals repeatedly move through danger.</p>
+        </div>
+        <div class="story-panel data-panel">
+          <div class="mini-grid"></div>
+          <div class="mini-path"></div>
+          <div class="mini-zone z1"></div>
+          <div class="mini-zone z2"></div>
+          <div class="mini-zone z3"></div>
+          <span class="micro-label label-a">HEAT</span>
+          <span class="micro-label label-b">MOVEMENT</span>
+          <span class="micro-label label-c">WATER GAP</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="map-section" id="map">
+      <div class="map-copy shell">
+        <span class="eyebrow">03 / The invisible fence</span>
+        <h2>See the city through their eyes.</h2>
+      </div>
+
+      <div class="map-shell shell">
+        <div class="map-canvas" id="mapCanvas">
+          <div class="map-grid"></div>
+          <div class="district d1">MANSOUR</div>
+          <div class="district d2">YARMOUK</div>
+          <div class="district d3">KARRADA</div>
+          <div class="district d4">JADRIYA</div>
+          <div class="river"></div>
+          <div class="street s1"></div>
+          <div class="street s2"></div>
+          <div class="street s3"></div>
+          <div class="street s4"></div>
+          <div class="risk-zone zone-a" data-base="84"></div>
+          <div class="risk-zone zone-b" data-base="63"></div>
+          <div class="risk-zone zone-c" data-base="41"></div>
+          <div class="risk-zone zone-d" data-base="76"></div>
+          <button class="sighting sighting-dog" data-kind="Dog" data-count="3" style="--x:28%;--y:42%"><span>3</span></button>
+          <button class="sighting sighting-cat" data-kind="Cats" data-count="6" style="--x:62%;--y:58%"><span>6</span></button>
+          <button class="sighting sighting-dog" data-kind="Dogs" data-count="5" style="--x:74%;--y:31%"><span>5</span></button>
+          <button class="water-point" style="--x:47%;--y:70%" title="Water point"></button>
+
+          <aside class="layer-panel glass-panel">
+            <span class="panel-label">LAYERS</span>
+            <label><input type="checkbox" checked data-layer="risk" /> Risk</label>
+            <label><input type="checkbox" checked data-layer="animals" /> Animals</label>
+            <label><input type="checkbox" checked data-layer="water" /> Water</label>
+            <label><input type="checkbox" checked data-layer="roads" /> Roads</label>
+          </aside>
+
+          <aside class="risk-card glass-panel" id="riskCard">
+            <div class="risk-card-top"><span class="panel-label">ZONE INTELLIGENCE</span><span class="status-dot"></span></div>
+            <h3>Al-Mansour / Zone 18</h3>
+            <div class="risk-score"><strong id="riskScore">84</strong><span>/100<br/>risk score</span></div>
+            <div class="risk-reasons">
+              <span>Heat exposure</span><b id="heatReason">+28</b>
+              <span>Fast traffic</span><b>+22</b>
+              <span>Repeated crossings</span><b>+19</b>
+              <span>Water gap</span><b>+15</b>
+            </div>
+            <div class="recommendation">
+              <span>Recommended intervention</span>
+              <strong id="recommendationText">Deploy shaded water station 180m north.</strong>
+            </div>
+          </aside>
+
+          <div class="time-control glass-panel">
+            <div class="time-header"><span>TIME MODEL</span><strong id="timeLabel">14:00</strong></div>
+            <input id="timeSlider" type="range" min="6" max="22" value="14" step="1" />
+            <div class="time-ticks"><span>06:00</span><span>10:00</span><span>14:00</span><span>18:00</span><span>22:00</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="action-section shell">
+      <div>
+        <span class="eyebrow">From insight to action</span>
+        <h2>The map should tell responders what to do next.</h2>
+      </div>
+      <div class="action-cards">
+        <article><span>01</span><h3>Detect</h3><p>Combine sightings with heat, roads and water access.</p></article>
+        <article><span>02</span><h3>Prioritize</h3><p>Score zones by urgency instead of treating every pin equally.</p></article>
+        <article><span>03</span><h3>Intervene</h3><p>Recommend the smallest action with the highest welfare impact.</p></article>
+      </div>
+    </section>
+
+    <section class="report-section shell">
+      <div class="report-card">
+        <div>
+          <span class="eyebrow">Citizen signal</span>
+          <h2>One sighting can reveal a pattern.</h2>
+          <p>Report an animal location in under 20 seconds. The system adds it to the risk model instead of leaving it as an isolated report.</p>
+        </div>
+        <button class="primary-button" id="reportBtnBottom">Report an animal <span>+</span></button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <span>Invisible Fence / AnimalHack 2026</span>
+    <span>Prototype for urban animal welfare intelligence</span>
+  </footer>
+
+  <div class="modal" id="reportModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card">
+      <button class="modal-close" data-close-modal>×</button>
+      <span class="eyebrow">Quick report</span>
+      <h2>What did you see?</h2>
+      <form id="reportForm">
+        <label>Animal type<select><option>Dog</option><option>Cat</option><option>Bird</option><option>Other</option></select></label>
+        <label>How many?<input type="number" min="1" value="1" /></label>
+        <label>Situation<select><option>Crossing traffic</option><option>Heat exposure</option><option>No water nearby</option><option>Injured animal</option><option>Other</option></select></label>
+        <label>Location<input type="text" value="Baghdad, Iraq" /></label>
+        <button class="primary-button" type="submit">Add to risk model</button>
+      </form>
+      <div class="form-success" id="formSuccess">Report added to the demo model.</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
