@@ -1,0 +1,20 @@
+/* Spatial Intelligence / God's Eye inspired mode — original implementation for Invisible Fence */
+.spatial-mode-button{position:absolute;left:22px;top:182px;z-index:9;width:158px;padding:12px 14px;border:1px solid rgba(255,255,255,.16);background:rgba(6,20,16,.78);backdrop-filter:blur(18px);color:#f3f0e7;font:700 10px/1.2 "DM Sans",sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:.25s}
+.spatial-mode-button:hover{background:rgba(159,211,181,.14);border-color:rgba(159,211,181,.5)}
+.spatial-mode-button.active{color:#7df0b5;border-color:rgba(125,240,181,.55);box-shadow:0 0 30px rgba(125,240,181,.08)}
+.spatial-stage{position:absolute;inset:0;z-index:3;opacity:0;pointer-events:none;transition:opacity .45s ease;background:#07130f}
+.spatial-stage.active{opacity:1;pointer-events:auto}
+#cesiumContainer{position:absolute;inset:0}
+#cesiumContainer .cesium-viewer-bottom,#cesiumContainer .cesium-viewer-toolbar,#cesiumContainer .cesium-viewer-animationContainer,#cesiumContainer .cesium-viewer-timelineContainer,#cesiumContainer .cesium-viewer-fullscreenContainer{display:none!important}
+.spatial-hud{position:absolute;left:22px;bottom:92px;z-index:12;width:240px;padding:15px 16px;background:rgba(4,14,11,.72);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(18px);pointer-events:none}
+.spatial-hud .hud-kicker{font-size:8px;letter-spacing:.18em;color:#9fd3b5;text-transform:uppercase}
+.spatial-hud .hud-title{font-family:"Playfair Display",serif;font-size:23px;margin:7px 0 10px;color:#f3f0e7}
+.spatial-hud .hud-row{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid rgba(255,255,255,.08);font-size:9px;color:#9fb1a7}
+.spatial-hud .hud-row b{color:#f3f0e7;font-weight:600}
+.spatial-legend{position:absolute;right:22px;bottom:24px;z-index:12;display:flex;align-items:center;gap:12px;padding:10px 12px;background:rgba(4,14,11,.7);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(14px);font-size:8px;letter-spacing:.08em;color:#b9c8c0;pointer-events:none}
+.legend-chip{display:inline-flex;align-items:center;gap:5px}.legend-chip:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--chip)}
+.spatial-loading{position:absolute;inset:0;z-index:30;display:grid;place-items:center;background:#07130f;color:#9fd3b5;font-size:10px;letter-spacing:.18em;text-transform:uppercase;transition:.3s}.spatial-loading.hidden{opacity:0;pointer-events:none}
+.spatial-error{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:40;max-width:420px;text-align:center;padding:24px;background:rgba(6,20,16,.94);border:1px solid rgba(240,116,101,.35);font-size:12px;line-height:1.7;color:#cbd8d1}
+.spatial-pulse{position:absolute;right:22px;top:22px;z-index:12;display:flex;align-items:center;gap:8px;font-size:8px;letter-spacing:.14em;color:#dce7e1;text-transform:uppercase;pointer-events:none}.spatial-pulse:before{content:"";width:7px;height:7px;border-radius:50%;background:#7df0b5;box-shadow:0 0 0 0 rgba(125,240,181,.6);animation:spatialPulse 1.7s infinite}
+@keyframes spatialPulse{70%{box-shadow:0 0 0 9px rgba(125,240,181,0)}100%{box-shadow:0 0 0 0 rgba(125,240,181,0)}}
+@media(max-width:760px){.spatial-mode-button{left:12px;top:156px;width:138px}.spatial-hud{left:12px;bottom:96px;width:200px}.spatial-legend{display:none}}
