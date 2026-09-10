@@ -1,0 +1,60 @@
+name: Refresh high quality animal assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/refresh-animal-assets.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download and optimize high quality transparent animal images
+        run: |
+          python -m pip install --quiet pillow requests
+          python - <<'PY'
+          import io
+          from pathlib import Path
+          import requests
+          from PIL import Image, ImageFilter
+
+          assets = {
+              'assets/animal-dog.webp': 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Transparent-jack-russell-puppy-dog.png',
+              'assets/animal-kitten.webp': 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Asian_tabby_cat_transparent.png',
+              'assets/animal-cat.webp': 'https://commons.wikimedia.org/wiki/Special:Redirect/file/EUR_cat_transparent.png',
+          }
+
+          Path('assets').mkdir(exist_ok=True)
+          headers = {'User-Agent': 'AnimalHack-asset-refresh/1.0'}
+
+          for out_path, url in assets.items():
+              r = requests.get(url, headers=headers, timeout=60)
+              r.raise_for_status()
+              im = Image.open(io.BytesIO(r.content)).convert('RGBA')
+              max_h = 1600
+              if im.height > max_h:
+                  scale = max_h / im.height
+                  im = im.resize((round(im.width * scale), max_h), Image.Resampling.LANCZOS)
+              rgb = im.convert('RGB').filter(ImageFilter.UnsharpMask(radius=0.8, percent=115, threshold=2))
+              alpha = im.getchannel('A')
+              im = Image.merge('RGBA', (*rgb.split(), alpha))
+              im.save(out_path, 'WEBP', quality=94, method=6)
+              print(out_path, im.size)
+          PY
+
+      - name: Commit upgraded assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/animal-dog.webp assets/animal-kitten.webp assets/animal-cat.webp
+          git diff --cached --quiet && exit 0
+          git commit -m "Upgrade animal images to high-resolution assets"
+          git push
