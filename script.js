@@ -88,3 +88,6 @@ window.addEventListener('scroll',()=>{
   const visual=$('.city-visual');
   if(visual && y<window.innerHeight*1.2) visual.style.transform=`translateY(${y*.035}px)`;
 },{passive:true});
+
+// Load the optional 3D spatial-intelligence layer without blocking the core experience.
+import('./gods-eye.js').catch(err=>console.warn('Spatial intelligence extension unavailable:',err));
