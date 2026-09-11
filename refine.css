@@ -1,0 +1,268 @@
+/* ============================================================
+   Invisible Fence — refinement layer (v5)
+   Loaded last so it wins over previous sheets.
+   ============================================================ */
+
+:root {
+  --rf-radius-s: 10px;
+  --rf-radius-m: 16px;
+  --rf-radius-l: 24px;
+  --rf-ease: cubic-bezier(.22, .9, .24, 1);
+  --rf-shadow-1: 0 10px 30px rgba(11, 18, 42, .08);
+  --rf-shadow-2: 0 24px 60px rgba(11, 18, 42, .14);
+  --rf-ink: #0d1633;
+  --rf-accent: #2948ff;
+}
+
+/* ---------- Adaptive navigation ---------- */
+.site-nav {
+  transition: background .45s var(--rf-ease), box-shadow .45s var(--rf-ease),
+    color .45s var(--rf-ease), backdrop-filter .45s var(--rf-ease);
+}
+
+.site-nav.is-scrolled {
+  background: rgba(250, 249, 245, .82);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 1px 0 rgba(13, 22, 51, .08), 0 12px 32px rgba(13, 22, 51, .08);
+  color: var(--rf-ink);
+}
+
+.site-nav.is-scrolled .brand,
+.site-nav.is-scrolled nav a,
+.site-nav.is-scrolled .nav-toggle span {
+  color: var(--rf-ink);
+}
+
+.site-nav.is-scrolled .nav-toggle span {
+  background: var(--rf-ink);
+}
+
+/* Animated underline on nav links */
+.site-nav nav a {
+  position: relative;
+  transition: color .3s var(--rf-ease);
+}
+
+.site-nav nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -4px;
+  height: 2px;
+  background: currentColor;
+  transition: right .35s var(--rf-ease);
+}
+
+.site-nav nav a:hover::after,
+.site-nav nav a[aria-current]::after {
+  right: 0;
+}
+
+/* ---------- Hero ---------- */
+.hero h1 {
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+
+.hero h1 span,
+.hero h1 em {
+  display: inline-block;
+}
+
+.hero-actions .primary-btn span,
+.hero-actions .text-link {
+  white-space: nowrap;
+}
+
+/* ---------- Living subjects: bind missing animal art ---------- */
+.animal-cat {
+  background-image: var(--animal-cat, url("assets/animal-cat.webp"));
+  background-size: cover;
+  background-position: center;
+}
+
+.animal-kitten {
+  background-image: var(--animal-kitten, url("assets/animal-kitten.webp"));
+  background-size: cover;
+  background-position: center;
+}
+
+.animal-card {
+  border-radius: var(--rf-radius-l);
+  overflow: hidden;
+  box-shadow: var(--rf-shadow-1);
+  transition: transform .5s var(--rf-ease), box-shadow .5s var(--rf-ease);
+}
+
+.animal-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--rf-shadow-2);
+}
+
+.animal-card > div {
+  min-height: 260px;
+}
+
+.animal-card > span {
+  display: block;
+  padding: 12px 16px;
+  font-size: 11px;
+  letter-spacing: .14em;
+  font-weight: 600;
+}
+
+/* ---------- Risk lens: tighter, calmer ---------- */
+.risk-lens {
+  box-shadow: var(--rf-shadow-2);
+  border-radius: var(--rf-radius-l);
+  overflow: hidden;
+}
+
+/* ---------- Story chapters ---------- */
+.story {
+  gap: clamp(40px, 6vw, 96px);
+}
+
+.story-intro {
+  align-self: start;
+  position: sticky;
+  top: 120px;
+}
+
+.chapter-no {
+  opacity: .55;
+  font-variant-numeric: tabular-nums;
+}
+
+.chapter {
+  border-radius: var(--rf-radius-l);
+  transition: transform .5s var(--rf-ease), box-shadow .5s var(--rf-ease);
+}
+
+.chapter.active {
+  box-shadow: var(--rf-shadow-1);
+}
+
+.heat-viz .temp {
+  color: var(--rf-ink);
+  text-shadow: none;
+}
+
+.water-viz .distance strong {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Buttons & controls ---------- */
+.primary-btn,
+.simulate-btn,
+.panel-report,
+.nav-action {
+  transition: transform .35s var(--rf-ease), box-shadow .35s var(--rf-ease),
+    background .35s var(--rf-ease);
+  white-space: nowrap;
+}
+
+.primary-btn:hover,
+.simulate-btn:hover,
+.panel-report:hover,
+.nav-action:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--rf-shadow-2);
+}
+
+.primary-btn:active,
+.simulate-btn:active,
+.panel-report:active,
+.nav-action:active {
+  transform: translateY(0);
+}
+
+.switch {
+  transition: background .3s var(--rf-ease);
+}
+
+.switch i {
+  transition: transform .3s var(--rf-ease);
+}
+
+input[type="range"] {
+  accent-color: var(--rf-accent);
+}
+
+/* ---------- Intervention lab ---------- */
+.lab-controls,
+.lab-output {
+  border-radius: var(--rf-radius-l);
+  box-shadow: var(--rf-shadow-1);
+}
+
+.simulation-map {
+  border-radius: var(--rf-radius-m);
+}
+
+/* ---------- Live map ---------- */
+.map-ui,
+.zone-panel {
+  border-radius: var(--rf-radius-l);
+  box-shadow: var(--rf-shadow-1);
+  overflow: hidden;
+}
+
+.layer-tabs button {
+  transition: background .3s var(--rf-ease), color .3s var(--rf-ease);
+}
+
+/* ---------- Closing ---------- */
+.closing-v2 {
+  border-radius: var(--rf-radius-l);
+  overflow: hidden;
+}
+
+.closing-animal {
+  background-image: var(--animal-cat, url("assets/animal-cat.webp"));
+  background-size: cover;
+  background-position: center;
+  min-height: 320px;
+}
+
+/* ---------- Focus, selection, motion ---------- */
+::selection {
+  background: var(--rf-accent);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 3px solid var(--rf-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 860px) {
+  .hero h1 {
+    font-size: clamp(34px, 9vw, 56px);
+  }
+
+  .story-intro {
+    position: static;
+  }
+
+  .animal-card > div {
+    min-height: 200px;
+  }
+
+  .closing-animal {
+    min-height: 220px;
+  }
+}
