@@ -1,0 +1,167 @@
+/* Invisible Fence — decorative illustration layer v7
+   Purpose: enrich large white/quiet areas with restrained heart and route line-art.
+   All artwork is CSS/SVG, pointer-events none, and decorative only. */
+
+:root{
+  --deco-blue:#2f78ff;
+  --deco-navy:#17335f;
+  --deco-coral:#ff786b;
+  --deco-cyan:#43c9d8;
+  --deco-soft:#dfe9ff;
+  --deco-heart-blue:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 110'%3E%3Cpath d='M60 101S12 72 12 35C12 17 25 8 39 8c10 0 18 5 21 14C64 13 72 8 82 8c14 0 26 9 26 27 0 37-48 66-48 66Z' fill='none' stroke='%232f78ff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --deco-heart-coral:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 110'%3E%3Cpath d='M60 101S12 72 12 35C12 17 25 8 39 8c10 0 18 5 21 14C64 13 72 8 82 8c14 0 26 9 26 27 0 37-48 66-48 66Z' fill='none' stroke='%23ff786b' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --deco-heart-cyan:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 110'%3E%3Cpath d='M60 101S12 72 12 35C12 17 25 8 39 8c10 0 18 5 21 14C64 13 72 8 82 8c14 0 26 9 26 27 0 37-48 66-48 66Z' fill='none' stroke='%2343c9d8' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --deco-loop:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 240'%3E%3Cpath d='M12 178C92 102 151 225 236 136S366 32 506 84' fill='none' stroke='%232f78ff' stroke-opacity='.22' stroke-width='3' stroke-linecap='round' stroke-dasharray='2 13'/%3E%3Cpath d='M51 197c53-16 67-44 86-81' fill='none' stroke='%23ff786b' stroke-opacity='.28' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='48' cy='198' r='6' fill='%23ff786b' fill-opacity='.58'/%3E%3Ccircle cx='505' cy='84' r='5' fill='%2343c9d8' fill-opacity='.55'/%3E%3C/svg%3E");
+  --deco-spark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%232f78ff' stroke-linecap='round'%3E%3Cpath d='M50 9v25M50 66v25M9 50h25M66 50h25' stroke-width='3'/%3E%3Cpath d='M22 22l17 17M61 61l17 17M78 22L61 39M39 61L22 78' stroke-width='2' opacity='.45'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* keep decoration behind content and out of interaction */
+.animal-context,.story,.intervention,.live-section{isolation:isolate;overflow:hidden;}
+.animal-context>*,.story>*,.intervention>*,.live-section>*{position:relative;z-index:2;}
+
+/* Living subjects — fill the very large white breathing room without crowding it. */
+.animal-context::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    var(--deco-heart-blue) 6.6% 10%/34px 31px no-repeat,
+    var(--deco-heart-coral) 31% 16%/25px 23px no-repeat,
+    var(--deco-heart-cyan) 92% 13%/42px 39px no-repeat,
+    var(--deco-heart-blue) 36% 78%/30px 28px no-repeat,
+    var(--deco-spark) 67% 13%/34px 34px no-repeat,
+    var(--deco-loop) 5% 91%/420px 190px no-repeat;
+  opacity:.78;
+}
+.animal-context::after{
+  content:"";
+  position:absolute;
+  right:-95px;
+  bottom:-115px;
+  width:360px;
+  height:360px;
+  border:1.5px solid rgba(47,120,255,.11);
+  border-radius:50%;
+  box-shadow:0 0 0 44px rgba(67,201,216,.035),0 0 0 92px rgba(47,120,255,.028);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Story — use a thin wandering route rather than repeating hearts everywhere. */
+.story::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+  background:
+    var(--deco-heart-blue) 93% 8%/28px 26px no-repeat,
+    var(--deco-heart-coral) 6% 58%/22px 20px no-repeat,
+    var(--deco-loop) 3% 22%/360px 165px no-repeat,
+    var(--deco-loop) 88% 87%/310px 142px no-repeat;
+  opacity:.48;
+}
+
+/* Intervention — this is the largest white void in the screenshots.
+   Build an editorial constellation: tiny hearts + route + soft orbital rings. */
+.intervention::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    var(--deco-heart-blue) 91.8% 11.8%/46px 42px no-repeat,
+    var(--deco-heart-coral) 84% 21%/24px 22px no-repeat,
+    var(--deco-heart-cyan) 73% 8%/22px 20px no-repeat,
+    var(--deco-heart-blue) 37% 12%/20px 18px no-repeat,
+    var(--deco-spark) 96% 29%/27px 27px no-repeat,
+    var(--deco-loop) 62% 18%/470px 215px no-repeat;
+  opacity:.67;
+}
+.intervention-head::after{
+  content:"";
+  position:absolute;
+  right:1%;
+  top:-34px;
+  width:220px;
+  height:220px;
+  border:1px solid rgba(47,120,255,.09);
+  border-radius:50%;
+  box-shadow:0 0 0 28px rgba(47,120,255,.025),0 0 0 57px rgba(67,201,216,.018);
+  pointer-events:none;
+  z-index:-1;
+}
+
+/* Live-map lead-in — sparse, so the map remains the visual hero. */
+.live-section::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    var(--deco-heart-cyan) 91% 8%/30px 28px no-repeat,
+    var(--deco-heart-blue) 7% 17%/22px 20px no-repeat,
+    var(--deco-loop) 78% 4%/330px 150px no-repeat;
+  opacity:.42;
+}
+
+/* Make the existing single faint heart in white sections more deliberate. */
+.lens-section::after,.intervention::before{
+  opacity:.20!important;
+  filter:none!important;
+  background:var(--deco-heart-blue) center/contain no-repeat!important;
+}
+
+/* Cards get a tiny editorial mark, not a wallpaper. */
+.animal-card::before,.animal-context-visuals::after{
+  background-blend-mode:normal;
+}
+.animal-card::after{
+  content:"";
+  position:absolute;
+  width:30px;
+  height:28px;
+  right:17px;
+  top:16px;
+  background:var(--deco-heart-blue) center/contain no-repeat;
+  opacity:.86;
+  z-index:5;
+  pointer-events:none;
+}
+.animal-card:nth-child(2)::after{background-image:var(--deco-heart-cyan);transform:rotate(8deg);}
+
+/* Responsive restraint: on smaller screens decoration becomes much quieter. */
+@media(max-width:980px){
+  .animal-context::before{
+    background:
+      var(--deco-heart-blue) 5% 8%/28px 26px no-repeat,
+      var(--deco-heart-cyan) 94% 10%/31px 29px no-repeat,
+      var(--deco-loop) 8% 94%/300px 140px no-repeat;
+    opacity:.48;
+  }
+  .story::before{opacity:.26;}
+  .intervention::after{
+    background:
+      var(--deco-heart-blue) 92% 9%/34px 31px no-repeat,
+      var(--deco-heart-coral) 82% 18%/20px 18px no-repeat,
+      var(--deco-loop) 67% 16%/300px 140px no-repeat;
+    opacity:.44;
+  }
+}
+
+@media(max-width:620px){
+  .animal-context::before,.story::before,.intervention::after,.live-section::after{opacity:.22;}
+  .animal-context::after,.intervention-head::after{display:none;}
+  .animal-card::after{width:24px;height:22px;right:12px;top:12px;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .animal-context::before,.story::before,.intervention::after,.live-section::after{animation:none!important;}
+}
