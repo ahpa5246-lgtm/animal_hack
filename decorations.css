@@ -1,5 +1,6 @@
-/* Invisible Fence — decorative illustration layer v7
-   Purpose: enrich large white/quiet areas with restrained heart and route line-art.
+/* Invisible Fence — decorative illustration layer v8
+   Purpose: enrich large white/quiet areas with restrained heart and route line-art,
+   then give the editorial typography a more distinctive rhythm without sacrificing clarity.
    All artwork is CSS/SVG, pointer-events none, and decorative only. */
 
 :root{
@@ -13,13 +14,52 @@
   --deco-heart-cyan:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 110'%3E%3Cpath d='M60 101S12 72 12 35C12 17 25 8 39 8c10 0 18 5 21 14C64 13 72 8 82 8c14 0 26 9 26 27 0 37-48 66-48 66Z' fill='none' stroke='%2343c9d8' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --deco-loop:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 240'%3E%3Cpath d='M12 178C92 102 151 225 236 136S366 32 506 84' fill='none' stroke='%232f78ff' stroke-opacity='.22' stroke-width='3' stroke-linecap='round' stroke-dasharray='2 13'/%3E%3Cpath d='M51 197c53-16 67-44 86-81' fill='none' stroke='%23ff786b' stroke-opacity='.28' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='48' cy='198' r='6' fill='%23ff786b' fill-opacity='.58'/%3E%3Ccircle cx='505' cy='84' r='5' fill='%2343c9d8' fill-opacity='.55'/%3E%3C/svg%3E");
   --deco-spark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%232f78ff' stroke-linecap='round'%3E%3Cpath d='M50 9v25M50 66v25M9 50h25M66 50h25' stroke-width='3'/%3E%3Cpath d='M22 22l17 17M61 61l17 17M78 22L61 39M39 61L22 78' stroke-width='2' opacity='.45'/%3E%3C/g%3E%3C/svg%3E");
+  --deco-wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 180'%3E%3Cpath d='M8 112C81 45 146 45 210 104s132 58 202 2 137-66 220-12' fill='none' stroke='%232f78ff' stroke-opacity='.16' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M67 134c28-20 47-20 75-2' fill='none' stroke='%2343c9d8' stroke-opacity='.28' stroke-width='2.3' stroke-linecap='round'/%3E%3C/svg%3E");
+  --deco-orbit:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 260'%3E%3Cellipse cx='130' cy='130' rx='108' ry='64' fill='none' stroke='%232f78ff' stroke-opacity='.12' stroke-width='2' transform='rotate(-18 130 130)'/%3E%3Cellipse cx='130' cy='130' rx='72' ry='116' fill='none' stroke='%2343c9d8' stroke-opacity='.10' stroke-width='2' transform='rotate(23 130 130)'/%3E%3Ccircle cx='212' cy='81' r='5' fill='%23ff786b' fill-opacity='.45'/%3E%3C/svg%3E");
 }
 
 /* keep decoration behind content and out of interaction */
-.animal-context,.story,.intervention,.live-section{isolation:isolate;overflow:hidden;}
-.animal-context>*,.story>*,.intervention>*,.live-section>*{position:relative;z-index:2;}
+.animal-context,.story,.intervention,.live-section,.lens-section{isolation:isolate;overflow:hidden;}
+.animal-context>*,.story>*,.intervention>*,.live-section>*,.lens-section>*{position:relative;z-index:2;}
 
-/* Living subjects — fill the very large white breathing room without crowding it. */
+/* ------------------------------------------------------------
+   EARLY WHITE SECTION / RISK LENS
+   Give the first quiet white area the same visual vocabulary as
+   the later intervention section: tiny hearts, a route, and orbit.
+   ------------------------------------------------------------ */
+.lens-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    var(--deco-heart-blue) 4.8% 10%/27px 25px no-repeat,
+    var(--deco-heart-cyan) 89% 13%/34px 31px no-repeat,
+    var(--deco-heart-coral) 78% 25%/20px 18px no-repeat,
+    var(--deco-spark) 18% 22%/30px 30px no-repeat,
+    var(--deco-loop) 59% 14%/450px 205px no-repeat,
+    var(--deco-orbit) 95% 5%/250px 250px no-repeat,
+    var(--deco-wave) 5% 39%/470px 132px no-repeat;
+  opacity:.68;
+}
+
+.lens-section::after{
+  content:"";
+  position:absolute;
+  right:5vw;
+  top:68px;
+  width:52px;
+  height:48px;
+  background:var(--deco-heart-blue) center/contain no-repeat!important;
+  filter:none!important;
+  opacity:.20!important;
+  pointer-events:none;
+  z-index:0;
+  transform:rotate(9deg);
+}
+
+/* Living subjects — richer but still calm around the large headline. */
 .animal-context::before{
   content:"";
   position:absolute;
@@ -31,9 +71,14 @@
     var(--deco-heart-coral) 31% 16%/25px 23px no-repeat,
     var(--deco-heart-cyan) 92% 13%/42px 39px no-repeat,
     var(--deco-heart-blue) 36% 78%/30px 28px no-repeat,
+    var(--deco-heart-coral) 24% 72%/18px 17px no-repeat,
+    var(--deco-heart-cyan) 52% 8%/21px 20px no-repeat,
     var(--deco-spark) 67% 13%/34px 34px no-repeat,
-    var(--deco-loop) 5% 91%/420px 190px no-repeat;
-  opacity:.78;
+    var(--deco-spark) 12% 80%/22px 22px no-repeat,
+    var(--deco-loop) 5% 91%/420px 190px no-repeat,
+    var(--deco-wave) 42% 86%/470px 130px no-repeat,
+    var(--deco-orbit) 96% 52%/230px 230px no-repeat;
+  opacity:.76;
 }
 .animal-context::after{
   content:"";
@@ -67,8 +112,7 @@
   opacity:.48;
 }
 
-/* Intervention — this is the largest white void in the screenshots.
-   Build an editorial constellation: tiny hearts + route + soft orbital rings. */
+/* Intervention — editorial constellation: tiny hearts + route + orbital rings. */
 .intervention::after{
   content:"";
   position:absolute;
@@ -83,6 +127,11 @@
     var(--deco-spark) 96% 29%/27px 27px no-repeat,
     var(--deco-loop) 62% 18%/470px 215px no-repeat;
   opacity:.67;
+}
+.intervention::before{
+  opacity:.20!important;
+  filter:none!important;
+  background:var(--deco-heart-blue) center/contain no-repeat!important;
 }
 .intervention-head::after{
   content:"";
@@ -112,17 +161,8 @@
   opacity:.42;
 }
 
-/* Make the existing single faint heart in white sections more deliberate. */
-.lens-section::after,.intervention::before{
-  opacity:.20!important;
-  filter:none!important;
-  background:var(--deco-heart-blue) center/contain no-repeat!important;
-}
-
-/* Cards get a tiny editorial mark, not a wallpaper. */
-.animal-card::before,.animal-context-visuals::after{
-  background-blend-mode:normal;
-}
+/* Cards get a tiny editorial mark, not wallpaper. */
+.animal-card::before,.animal-context-visuals::after{background-blend-mode:normal;}
 .animal-card::after{
   content:"";
   position:absolute;
@@ -137,8 +177,100 @@
 }
 .animal-card:nth-child(2)::after{background-image:var(--deco-heart-cyan);transform:rotate(8deg);}
 
-/* Responsive restraint: on smaller screens decoration becomes much quieter. */
+/* ------------------------------------------------------------
+   DISTINCTIVE EDITORIAL TYPOGRAPHY
+   Keep the existing families, but turn the hierarchy into a
+   deliberate display system: dense sans + elegant italic serif.
+   ------------------------------------------------------------ */
+.lens-head h2,.animal-context-copy h2,.story-intro h2,.intervention-head h2,.live-head h2,.closing-copy h2{
+  font-kerning:normal;
+  text-rendering:geometricPrecision;
+}
+
+.lens-head h2,.intervention-head h2,.live-head h2{
+  letter-spacing:-.067em!important;
+  line-height:.90!important;
+  font-weight:690!important;
+}
+
+.lens-head h2 em,.intervention-head h2 em,.live-head h2 em,.closing-copy h2 em{
+  position:relative;
+  display:inline-block;
+  font-weight:430!important;
+  letter-spacing:-.055em!important;
+  transform:skewX(-2deg);
+  text-shadow:0 1px 0 rgba(255,255,255,.65);
+}
+
+.lens-head h2 em::after,.intervention-head h2 em::after,.live-head h2 em::after,.closing-copy h2 em::after{
+  content:"";
+  position:absolute;
+  left:.02em;
+  bottom:-.08em;
+  width:46%;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--deco-blue),rgba(67,201,216,.16));
+  transform:rotate(-1.3deg);
+  opacity:.52;
+}
+
+.animal-context-copy h2{
+  font-weight:735!important;
+  letter-spacing:-.068em!important;
+  line-height:.93!important;
+  max-width:8.4em;
+}
+
+.animal-context-copy h2::after{
+  content:"";
+  display:block;
+  width:82px;
+  height:8px;
+  margin-top:22px;
+  background:
+    linear-gradient(90deg,var(--deco-blue) 0 52%,transparent 52% 61%,var(--deco-cyan) 61% 78%,transparent 78% 86%,var(--deco-coral) 86% 100%);
+  border-radius:999px;
+  opacity:.88;
+}
+
+.story-intro h2{
+  letter-spacing:-.055em!important;
+  font-weight:690!important;
+}
+
+.section-index{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  letter-spacing:.19em!important;
+}
+.section-index::after{
+  content:"";
+  width:26px;
+  height:1px;
+  background:currentColor;
+  opacity:.28;
+}
+
+.chapter-copy h3{
+  letter-spacing:-.052em!important;
+  line-height:1.01!important;
+  font-weight:675!important;
+}
+
+/* ------------------------------------------------------------
+   RESPONSIVE RESTRAINT
+   ------------------------------------------------------------ */
 @media(max-width:980px){
+  .lens-section::before{
+    background:
+      var(--deco-heart-blue) 5% 8%/24px 22px no-repeat,
+      var(--deco-heart-cyan) 94% 10%/28px 26px no-repeat,
+      var(--deco-loop) 60% 14%/300px 140px no-repeat;
+    opacity:.42;
+  }
   .animal-context::before{
     background:
       var(--deco-heart-blue) 5% 8%/28px 26px no-repeat,
@@ -154,14 +286,17 @@
       var(--deco-loop) 67% 16%/300px 140px no-repeat;
     opacity:.44;
   }
+  .animal-context-copy h2{max-width:none;}
 }
 
 @media(max-width:620px){
-  .animal-context::before,.story::before,.intervention::after,.live-section::after{opacity:.22;}
+  .lens-section::before,.animal-context::before,.story::before,.intervention::after,.live-section::after{opacity:.20;}
   .animal-context::after,.intervention-head::after{display:none;}
   .animal-card::after{width:24px;height:22px;right:12px;top:12px;}
+  .lens-head h2 em::after,.intervention-head h2 em::after,.live-head h2 em::after,.closing-copy h2 em::after{width:34%;}
+  .animal-context-copy h2::after{width:58px;height:6px;margin-top:16px;}
 }
 
 @media(prefers-reduced-motion:reduce){
-  .animal-context::before,.story::before,.intervention::after,.live-section::after{animation:none!important;}
+  .lens-section::before,.animal-context::before,.story::before,.intervention::after,.live-section::after{animation:none!important;}
 }
