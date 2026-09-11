@@ -124,4 +124,22 @@
     if (target.tabIndex < 0) target.setAttribute('tabindex', '-1');
     target.focus({ preventScroll: true });
   }));
+
+  /* 10. Adaptive navigation — light glass bar once past the hero */
+  if (nav) {
+    const hero = q('.hero');
+    const threshold = () => (hero ? hero.offsetHeight - 140 : 240);
+    let ticking = false;
+    const sync = () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > threshold());
+      ticking = false;
+    };
+    addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(sync);
+    }, { passive: true });
+    addEventListener('resize', sync, { passive: true });
+    sync();
+  }
 })();
